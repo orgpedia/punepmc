@@ -268,11 +268,12 @@ def main(args):
             save_records("circulars", circulars)
             print(f"\ten page {idx + 1}: {len(seen)} nodes")
 
+        mr_seen = 0
         for idx, page in enumerate(iter_api(NODE_API, title_params(after), "mr", dump_dir)):
             update_mr(circulars, page, log, new_nids)
+            mr_seen += len(page.get("data", []))
             save_records("circulars", circulars)
-            if (idx + 1) % 20 == 0:
-                print(f"\tmr page {idx + 1}")
+            print(f"\tmr page {idx + 1}: {mr_seen} nodes")
     finally:
         write_records("circulars", circulars)  # pages are in nid order, so a partial run resumes cleanly
 

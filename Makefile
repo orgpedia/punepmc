@@ -18,6 +18,8 @@ DOWNLOAD_DELAY ?= 1
 RETRY_FAILED ?= 0
 # Wayback SPN2: reuse an existing capture newer than this instead of re-capturing
 WAYBACK_REUSE ?= 30d
+# setup uploads only this many circulars to archive.org (oldest first; empty = all); the rest via `backfill WHAT=archive`
+SETUP_ARCHIVE_LIMIT ?= 55
 # archive.org collection (opensource = Community Texts)
 IA_COLLECTION ?= opensource
 # 0 = status skips the site vs archive.org search
@@ -28,7 +30,7 @@ SEED_DIR ?= ../pmccirc/import/documents
 LIMIT_ARG := $(if $(LIMIT),--limit $(LIMIT))
 RETRY_ARG := $(if $(filter 1,$(RETRY_FAILED)),--retry-failed)
 SCOPE_ARG = --scope $(SCOPE) --window $(NEW_WINDOW)
-RUN = mkdir -p $(LOGS); set -o pipefail; $(PY) $(SRC)/$(1) | tee $(LOGS)/$@.log
+RUN = mkdir -p $(LOGS); set -o pipefail; $(PY) $(SRC)/$(1) 2>&1 | tee $(LOGS)/$@.log
 
 .PHONY: help install fetch fetch_full check_codes onetime_seed download link_wayback upload_archive \
         update_archive_metadata sync_hf_push hf_card import status \
@@ -39,6 +41,7 @@ help:
 	@echo ""
 	@echo "Modes"
 	@echo "  setup                    first time, locally: fetch_full onetime_seed download sync_hf_push hf_card upload_archive (no wayback)"
+	@echo "                           uploads only the first SETUP_ARCHIVE_LIMIT=$(SETUP_ARCHIVE_LIMIT) circulars to archive.org"
 	@echo "  daily                    new circulars only: fetch download link_wayback upload_archive sync_hf_push (SCOPE=new)"
 	@echo "  backfill WHAT=archive    upload the archive.org backlog              [LIMIT=$(LIMIT)]"
 	@echo "  backfill WHAT=wayback    capture the Wayback backlog                 [LIMIT=$(LIMIT)]"
@@ -114,7 +117,7 @@ setup: install
 	$(MAKE) --no-print-directory download || rc=1; \
 	$(MAKE) --no-print-directory sync_hf_push || rc=1; \
 	$(MAKE) --no-print-directory hf_card || rc=1; \
-	$(MAKE) --no-print-directory upload_archive SCOPE=all || rc=1; \
+	$(MAKE) --no-print-directory upload_archive SCOPE=all LIMIT=$(SETUP_ARCHIVE_LIMIT) || rc=1; \
 	$(MAKE) --no-print-directory status || rc=1; \
 	exit $$rc
 

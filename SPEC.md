@@ -324,7 +324,7 @@ The starting point for `fetch` is derived, not stored: the highest nid in `circu
 
 ## 5. Building-block targets
 
-Each target runs `uv run python -u input/src/<script>.py …`, and the output is piped through `tee input/logs/<target>.log` (`set -o pipefail`).
+Each target runs `uv run python -u input/src/<script>.py …`, and its output (stdout and stderr, so tracebacks too) is piped through `tee input/logs/<target>.log` (`set -o pipefail`).
 All of them are idempotent and resumable: re-running one skips work already recorded in the state files.
 
 Make variables:
@@ -339,6 +339,7 @@ Make variables:
 | `WAYBACK_REUSE` | `30d` | `link_wayback` |
 | `IA_COLLECTION` | `opensource` (Community Texts) | `upload_archive` |
 | `SEED_DIR` | `../pmccirc/import/documents` | `onetime_seed` |
+| `SETUP_ARCHIVE_LIMIT` | `55` | `setup`: how many circulars (oldest nid first) it uploads to archive.org; empty = all |
 | `IA_CHECK` | `1` | `status`: `0` skips the site vs archive.org search (daily) |
 
 ### `install`
@@ -443,13 +444,14 @@ Prints:
 ## 6. Modes
 
 ### Setup: `make setup` (locally, once)
-Runs: `install → fetch_full → check_codes → onetime_seed → download → sync_hf_push → hf_card → upload_archive → status`.
+Runs: `install → fetch_full → check_codes → onetime_seed → download → sync_hf_push → hf_card → upload_archive LIMIT=$(SETUP_ARCHIVE_LIMIT) → status`.
 
 - **No Wayback.** The ~8,900 captures are left to `backfill WHAT=wayback`.
 - After `fetch_full`, `check_codes` stops the run if any entry is held because of a missing department code, so codes get fixed before any
   item is uploaded. Fix `departments.json`, run `make fetch`, then `make setup` again.
-- `upload_archive` covers ~9,470 items and will take many hours. It is resumable: re-run `make setup` (finished steps are no-ops), or let
-  `backfill WHAT=archive` on GitHub Actions finish the rest.
+- `upload_archive` uploads only the first `SETUP_ARCHIVE_LIMIT` (55) circulars, so the items can be checked on archive.org first.
+  The remaining ~9,400 go up later with `make backfill WHAT=archive [LIMIT=n]`, locally or on GitHub Actions; it is resumable.
+  `make setup SETUP_ARCHIVE_LIMIT=` uploads everything in one go.
 - Afterwards, commit `input/documents/` and push. From then on GitHub Actions takes over.
 
 ### Daily: `make daily` (GitHub Actions cron, or locally)
