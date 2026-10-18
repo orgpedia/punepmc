@@ -10,8 +10,8 @@ Everything runs from one Makefile, either locally or from GitHub Actions, in thr
 | Mode | Target | Where | What |
 |---|---|---|---|
 | **Setup** | `make setup` | locally, once | full crawl → move PDFs from pmccirc → download the rest → HF → archive.org. **No Wayback.** |
-| **Daily** | `make daily` | GitHub Actions cron (or locally) | new and changed entries only → download → Wayback → archive.org → HF |
-| **Backfill** | `make backfill_archive`, `backfill_wayback`, `backfill_crawl` | GitHub Actions (manual or cron), or locally | work through the backlog in `LIMIT`-sized chunks, or re-crawl the whole site |
+| **Daily** | `make daily` | GitHub Actions cron (or locally) | **new circulars only** (never re-reads or updates old ones) → download → Wayback → archive.org → HF |
+| **Backfill** | `make backfill WHAT=archive`, `WHAT=wayback`, `WHAT=crawl` | GitHub Actions (manual or cron), or locally | work through the backlog in `LIMIT`-sized chunks, or re-crawl the whole site |
 
 Processing (OCR, translation, extraction) is a later stage and is out of scope here.
 
@@ -241,12 +241,12 @@ punepmc/
 ├── .gitignore                # .env, .venv/, LFS/, input/logs/*.log, *.part
 ├── .github/workflows/
 │   ├── daily.yml             # cron → make daily
-│   └── backfill.yml          # manual (+ cron for wayback) → make backfill_<what>
+│   └── backfill.yml          # manual (+ cron for wayback) → make backfill WHAT=<what>
 ├── input/
 │   ├── src/
 │   │   ├── common.py         # paths, constants, http session, JSON:API paging, json/symlink helpers, doc_id rules, ensure_pdf()
-│   │   ├── fetch.py          # incremental (default) | --full
-│   │   ├── seed.py           # one-time: move matching PDFs from ../pmccirc
+│   │   ├── fetch.py          # new only (default) | --full
+│   │   ├── onetime_seed.py   # one-time: move matching PDFs from ../pmccirc
 │   │   ├── download.py
 │   │   ├── link_wayback.py   # --scope new|all --limit N
 │   │   ├── upload_archive.py # --scope new|all --limit N | --update-metadata
@@ -279,7 +279,8 @@ punepmc/
 ## 4. State files
 
 All files live in `input/documents/publications/circulars/`. Each one is a JSON list sorted by its key, written with `indent=2, ensure_ascii=False` and
-rewritten atomically (write `.tmp`, then rename) after every page or item, so an interrupted run can resume. Git history is the full record of edits.
+rewritten atomically (write `.tmp`, then rename). Writes happen at most every 10 s during a run and always at the end, including on
+Ctrl-C or SIGTERM (e.g. a cancelled GitHub Actions run), so an interrupted run can resume. Git history is the full record of edits.
 
 **circulars.json** (key `nid`)
 ```json
@@ -312,14 +313,14 @@ rewritten atomically (write `.tmp`, then rename) after every page or item, so an
 **archive.json** (key `doc_id` + `fid`): `doc_id, fid, identifier, archive_url, sha1, upload_success, metadata_sha1, message, time_utc`.
 `metadata_sha1` is the hash of the metadata last sent, so `update_archive_metadata` only touches items whose metadata changed.
 
-**changes/<YYYY-MM-DD>.json**: one entry per event, appended by `fetch` and `download`:
+**changes/<YYYY-MM-DD>.json**: one entry per event, appended by `fetch` at the end of each run:
 ```json
 {"time_utc": "…", "nid": 10807, "doc_id": "…", "event": "file_replaced", "old": {"fid": 9999, "url": "…"}, "new": {"fid": 39420, "url": "…"}}
 ```
 - Events: `new`, `file_replaced`, `metadata_changed` (with the list of changed fields), `removed`, `reappeared`, `held`, `released`.
 - This is also the hand-off to the later processing stage.
 
-The **watermark** for incremental fetches is derived, not stored: `max(changed)` over `circulars.json`.
+The starting point for `fetch` is derived, not stored: the highest nid in `circulars.json`.
 
 ## 5. Building-block targets
 
@@ -330,33 +331,34 @@ Make variables:
 
 | Variable | Default | Used by |
 |---|---|---|
-| `LIMIT` | empty (no cap) | `link_wayback`, `upload_archive`, `backfill_*`: maximum items this run |
-| `SCOPE` | `all` | `link_wayback`, `upload_archive`: `new` = entries first seen, or whose fid changed, within `NEW_WINDOW` |
+| `LIMIT` | empty (no cap) | `link_wayback`, `upload_archive`, `backfill`: maximum items this run |
+| `SCOPE` | `all` | `download`, `link_wayback`, `upload_archive`, `sync_hf_push`: `new` = circulars first seen within `NEW_WINDOW` |
 | `NEW_WINDOW` | `7d` | what `SCOPE=new` means; lets the daily run retry its own recent failures without touching the backlog |
-| `FETCH_OVERLAP` | `2d` | `fetch` |
 | `DOWNLOAD_DELAY` | `1` (s) | `download`, `fetch` |
 | `RETRY_FAILED` | `0` | `download`: also retry `failed:404` |
 | `WAYBACK_REUSE` | `30d` | `link_wayback` |
 | `IA_COLLECTION` | `opensource` (Community Texts) | `upload_archive` |
-| `SEED_DIR` | `../pmccirc/import/documents` | `seed` |
+| `SEED_DIR` | `../pmccirc/import/documents` | `onetime_seed` |
+| `IA_CHECK` | `1` | `status`: `0` skips the site vs archive.org search (daily) |
 
 ### `install`
 Runs `uv venv && uv sync`.
 
-### `fetch`: incremental
-1. `since = max(changed) − FETCH_OVERLAP`, as a unix epoch. If `circulars.json` is empty, the script falls back to `--full`.
-2. Pages through `en` with `filter changed > since`, `sort=changed` **ascending** (items edited mid-run land at the end instead of shifting earlier pages),
+### `fetch`: new circulars only
+1. `after = max(nid)` in `circulars.json` (nids only grow). If `circulars.json` is empty, the script falls back to `--full`.
+2. Pages through `en` with `filter drupal_internal__nid > after`, `sort=drupal_internal__nid`,
    `include=field_circular_upload,field_department`. Then runs the same query on `mr` for `title_mr`.
-3. Upserts each node, assigns doc_ids, releases held entries that `overrides.json` or `departments.json` now fixes, updates `same_file_as`,
-   and records events. A doc_id is never changed.
+3. Adds each new node, assigns doc_ids, releases held entries that `overrides.json` or `departments.json` now fixes, updates `same_file_as`,
+   and records `new` events. **Known circulars are never re-read or changed**; PMC's edits to them, file replacements and removals are
+   picked up by `fetch_full` (`backfill WHAT=crawl`). A node published late with a lower nid is also caught there.
 4. Saves the raw responses under `LFS/punePMC/api/circulars/<run>/`.
-5. Prints a summary (new / file replaced / metadata changed / held). On a normal day this is 1–2 requests per language.
+5. Prints a summary. On a normal day this is 1 request per language.
 
 ### `fetch_full`
 Walks the whole list (`sort=drupal_internal__nid`, ~190 pages per language) and does the same upsert as `fetch`. It also marks nids that are no longer listed as
-`removed` (their PDFs and items are kept) and refreshes `departments.json` from the taxonomy. This catches anything the `changed` filter could miss.
+`removed` (their PDFs and items are kept) and refreshes `departments.json` from the taxonomy. This is the only step that updates known circulars.
 
-### `seed`: one-time, **moves** PDFs from pmccirc
+### `onetime_seed`: one-time, **moves** PDFs from pmccirc
 For each `ok` entry without a current download, the file `$(SEED_DIR)/<year>/<nid>.pdf` is moved with a same-disk `rename` (instant, no extra space) when:
 1. pmccirc's `pdfs.json` says `download_success`;
 2. its `url` equals the current `file_url`; and
@@ -370,14 +372,16 @@ Expected result (2026-10-17 scan): all 8,353 of pmccirc's PDFs match and are mov
 the 5 repaired files), and fewer downloads than that because some share a PDF. If `SEED_DIR` doesn't exist, the step is skipped with a note.
 
 ### `download`
-For every current fid of an `ok`, non-removed entry: if the fid already has a `downloaded`/`seeded` record, the script only ensures each doc_id path
+With `SCOPE=new`, only fids of circulars first seen within `NEW_WINDOW`; with `SCOPE=all`, every current fid of an `ok`, non-removed entry.
+For each: if the fid already has a `downloaded`/`seeded` record, the script only ensures each doc_id path
 exists (hardlink, or `ensure_pdf()` on CI). Otherwise it downloads the file once:
 1. Streams to `<path>.part` (retries, `Range` resume), then sleeps `DOWNLOAD_DELAY`.
-2. Verifies the size against `Content-Length` and the API `filesize`, and checks that the file starts with `%PDF`. Then it computes the sha1 and renames
-   the `.part` file over `<path>`. It hardlinks the other doc_id paths, sets `current` on the new fid and clears it on the old one.
+2. Verifies the size against `Content-Length` and checks for `%PDF` in the first 1 KB. A mismatch with the API `filesize` is only a warning.
+   Then it computes the sha1 and renames the `.part` file over `<path>`. It hardlinks the other doc_id paths, sets `current` on the new fid and clears it on the old one.
 3. Creates or updates the symlinks.
-4. On failure, it records `failed:<reason>` and increments `attempts`. A `failed:404` is retried only when the fid changes or with `RETRY_FAILED=1`.
-5. Exits with a non-zero code on failures other than 404 (404s only warn).
+4. On failure, it records `failed:<reason>` and increments `attempts`. `failed:404` and `failed:not_pdf` are retried only when the fid changes,
+   or with `RETRY_FAILED=1`. Other failures are retried on the next run.
+5. Exits with a non-zero code on failures other than 404 / not_pdf (those only warn).
 
 ### `link_wayback`
 For each fid without `link_success: true`, within `SCOPE`, oldest first, up to `LIMIT`. The steps follow doptIASCivil:
@@ -420,7 +424,9 @@ a new Wayback link, a collection move, or later the translated title). It never 
 ### `sync_hf_push`
 `create_repo("Orgpedia/punePMC", repo_type="dataset", exist_ok=True)`, then `upload_folder(folder_path="LFS/punePMC",
 allow_patterns=["publications/circulars/pdfs/**"], commit_message="circulars: <mode> <date>")`.
+With `SCOPE=new` (daily), `allow_patterns` lists just the PDFs of circulars first seen within `NEW_WINDOW`.
 Only files present in `LFS/` are sent, unchanged ones are skipped, and nothing is ever deleted on HF. So a CI run with a partial `LFS/` is safe.
+With more than 1,000 local PDFs (the first push) it uses `upload_large_folder` instead, which is resumable and splits the upload into several commits.
 
 ### `hf_card`
 Writes and pushes `README.md` (§8) if it is missing or has changed.
@@ -437,33 +443,37 @@ Prints:
 ## 6. Modes
 
 ### Setup: `make setup` (locally, once)
-Runs: `install → fetch_full → seed → download → sync_hf_push → hf_card → upload_archive → status`.
+Runs: `install → fetch_full → check_codes → onetime_seed → download → sync_hf_push → hf_card → upload_archive → status`.
 
-- **No Wayback.** The ~8,900 captures are left to `backfill_wayback`.
-- Before `seed`, it stops if any entry is held because of a missing department code, so codes get fixed before any doc_id is frozen.
+- **No Wayback.** The ~8,900 captures are left to `backfill WHAT=wayback`.
+- After `fetch_full`, `check_codes` stops the run if any entry is held because of a missing department code, so codes get fixed before any
+  item is uploaded. Fix `departments.json`, run `make fetch`, then `make setup` again.
 - `upload_archive` covers ~9,470 items and will take many hours. It is resumable: re-run `make setup` (finished steps are no-ops), or let
-  `backfill_archive` on GitHub Actions finish the rest.
+  `backfill WHAT=archive` on GitHub Actions finish the rest.
 - Afterwards, commit `input/documents/` and push. From then on GitHub Actions takes over.
 
 ### Daily: `make daily` (GitHub Actions cron, or locally)
-Runs: `fetch → download → link_wayback SCOPE=new → upload_archive SCOPE=new → update_archive_metadata → sync_hf_push → status`.
+Runs: `fetch → download → link_wayback → upload_archive → sync_hf_push` (all `SCOPE=new`) `→ status IA_CHECK=0`.
 
-- `SCOPE=new` limits Wayback and archive.org to entries that are new, or whose file changed, within `NEW_WINDOW` (7 days). The daily job therefore stays
-  small and retries its own recent failures, and never wanders into the backlog.
-- `update_archive_metadata` only touches items whose metadata changed (e.g. PMC edited a title).
+- Daily is about **new circulars only**. `fetch` asks PMC only for nids above the highest known one, and every later step is limited to
+  circulars first seen within `NEW_WINDOW` (7 days), so the job stays small and retries its own recent failures.
+- It never re-reads old circulars or updates old data: no `update_archive_metadata`, no retries of old failed downloads, no archive.org
+  search in `status`. All of that is backfill's job.
 - It exits non-zero if any step failed, so GitHub Actions marks the run red.
 
 ### Backfill (GitHub Actions manual or cron, or locally)
 
 | Target | Runs | Typical use |
 |---|---|---|
-| `make backfill_archive LIMIT=500` | `upload_archive SCOPE=all` → `status` | finish archive.org uploads left over from setup |
-| `make backfill_wayback LIMIT=200` | `link_wayback SCOPE=all` → `status` | slowly work through the ~8,900 Wayback captures; scheduled daily until done |
-| `make backfill_crawl` | `fetch_full → download → upload_archive SCOPE=new → update_archive_metadata → sync_hf_push → status` | weekly safety net: re-crawl the whole site, update the JSON, fetch missing or changed PDFs, catch removals |
+| `make backfill WHAT=archive LIMIT=500` | `upload_archive SCOPE=all` → `status` | finish archive.org uploads left over from setup |
+| `make backfill WHAT=wayback LIMIT=200` | `link_wayback SCOPE=all` → `update_archive_metadata` → `status` | slowly work through the ~8,900 Wayback captures, and add the new Wayback links to the archive.org items; scheduled daily until done |
+| `make backfill WHAT=crawl` | `fetch_full → download → upload_archive → update_archive_metadata → sync_hf_push` (all `SCOPE=all`) `→ status` | weekly: re-read the whole site, apply PMC's edits to old circulars, fetch missing or replaced PDFs, upload anything not yet on archive.org, catch removals |
 
 ## 7. GitHub Actions
 
 Both workflows run the same Makefile targets as a local run, so anything can be reproduced locally with `make <target>`.
+`daily` and every `backfill` first run `require_setup`, which fails unless `circulars.json` exists. That way a scheduled run can never
+do a first-time setup on CI.
 
 **`.github/workflows/daily.yml`**
 - `on: schedule: cron "0 16 * * *"` (21:30 IST) and `workflow_dispatch`.
@@ -474,7 +484,7 @@ Both workflows run the same Makefile targets as a local run, so anything can be 
 **`.github/workflows/backfill.yml`**
 - `on: workflow_dispatch` with inputs `what` (`archive` | `wayback` | `crawl`) and `limit`, plus
   `schedule` crons for `wayback` (daily, `LIMIT=200`) and `crawl` (weekly, Sunday).
-- The steps are the same as daily, with `make backfill_$(what) LIMIT=$(limit)`.
+- The steps are the same as daily, with `make backfill WHAT=$(what) LIMIT=$(limit)`.
 - `timeout-minutes: 330`, under GitHub's 6-hour job limit. `LIMIT` keeps each run well inside it.
 
 Shared:

@@ -1,0 +1,646 @@
+[
+  {
+    "tid": 1,
+    "name_en": "Bhavan Rachna Department",
+    "name_mr": "भवन रचना विभाग",
+    "slug": "bhavan",
+    "code": "bhavan"
+  },
+  {
+    "tid": 2,
+    "name_en": "Building Development",
+    "name_mr": "बांधकाम विकास",
+    "slug": "building-development",
+    "code": "building"
+  },
+  {
+    "tid": 3,
+    "name_en": "Central Store Department",
+    "name_mr": "मध्यवर्ती भांडार विभाग",
+    "slug": "central-store-department",
+    "code": "store"
+  },
+  {
+    "tid": 4,
+    "name_en": "Chief Accounts And Finance Office",
+    "name_mr": "मुख्यलेखा व वित्त विभाग",
+    "slug": "accounts",
+    "code": "accounts"
+  },
+  {
+    "tid": 5,
+    "name_en": "Chief Engineer Project",
+    "name_mr": "मुख्य अभियंता प्रकल्प",
+    "slug": "ce-project",
+    "code": "ce-project"
+  },
+  {
+    "tid": 6,
+    "name_en": "City Census Department",
+    "name_mr": "शहर जनगणना कार्यालय",
+    "slug": "census",
+    "code": "census"
+  },
+  {
+    "tid": 7,
+    "name_en": "Cultural Centers",
+    "name_mr": "सांस्कृतिक केंद्र विभाग",
+    "slug": "cultural",
+    "code": "cultural"
+  },
+  {
+    "tid": 8,
+    "name_en": "Slum Eradication And Rehabilitation",
+    "name_mr": "झोपडपट्टी निर्मुलन व पुनर्वसन",
+    "slug": "slum",
+    "code": "slum"
+  },
+  {
+    "tid": 9,
+    "name_en": "Disaster Management Cell",
+    "name_mr": "आपत्ती व्यवस्थापन विभाग",
+    "slug": "disaster",
+    "code": "disaster"
+  },
+  {
+    "tid": 11,
+    "name_en": "Election Department",
+    "name_mr": "निवडणुक विभाग",
+    "slug": "election",
+    "code": "election"
+  },
+  {
+    "tid": 12,
+    "name_en": "Electrical Department",
+    "name_mr": "विद्युत विभाग",
+    "slug": "electrical",
+    "code": "electrical"
+  },
+  {
+    "tid": 13,
+    "name_en": "Encroachment Department",
+    "name_mr": "अतिक्रमण /अनधिकृत बांधकाम निर्मुलन विभाग",
+    "slug": "encroachment",
+    "code": "encroachment"
+  },
+  {
+    "tid": 14,
+    "name_en": "Environment Department",
+    "name_mr": "पर्यावरण विभाग",
+    "slug": "environment",
+    "code": "environment"
+  },
+  {
+    "tid": 15,
+    "name_en": "Estate And Management Department",
+    "name_mr": "मालमत्ता व व्यवस्थापन विभाग",
+    "slug": "estate-management",
+    "code": "estate"
+  },
+  {
+    "tid": 16,
+    "name_en": "Fire Brigade",
+    "name_mr": "अग्निशामक विभाग",
+    "slug": "fire",
+    "code": "fire"
+  },
+  {
+    "tid": 17,
+    "name_en": "Garden Department",
+    "name_mr": "उद्यान विभाग",
+    "slug": "garden",
+    "code": "garden"
+  },
+  {
+    "tid": 18,
+    "name_en": "General Administration",
+    "name_mr": "सामान्य प्रशासन विभाग",
+    "slug": "general-administration",
+    "code": "gad"
+  },
+  {
+    "tid": 19,
+    "name_en": "Health Department",
+    "name_mr": "आरोग्य विभाग",
+    "slug": "health",
+    "code": "health"
+  },
+  {
+    "tid": 20,
+    "name_en": "Heritage Cell",
+    "name_mr": "वारसा व्यवस्थापन",
+    "slug": "heritage",
+    "code": "heritage"
+  },
+  {
+    "tid": 22,
+    "name_en": "Information Technology",
+    "name_mr": "माहिती व तंत्रज्ञान विभाग",
+    "slug": "it",
+    "code": "it"
+  },
+  {
+    "tid": 23,
+    "name_en": "Labour Welfare Department",
+    "name_mr": "कामगार कल्याण विभाग",
+    "slug": "labour-welfare",
+    "code": "labour"
+  },
+  {
+    "tid": 25,
+    "name_en": "Motor Vehicles Department",
+    "name_mr": "मोटार वाहन विभाग",
+    "slug": "vehicle-depo",
+    "code": "vehicle"
+  },
+  {
+    "tid": 26,
+    "name_en": "Municipal Secretary",
+    "name_mr": "नगर सचिव विभाग",
+    "slug": "secretary",
+    "code": "secretary"
+  },
+  {
+    "tid": 27,
+    "name_en": "Pradhan Mantri Awas Yojana",
+    "name_mr": "प्रधानमंत्री आवास योजना",
+    "slug": "pmay",
+    "code": "pmay"
+  },
+  {
+    "tid": 28,
+    "name_en": "Primary Education Department",
+    "name_mr": "प्राथमिक शिक्षण विभाग",
+    "slug": "primary",
+    "code": "primary-edu"
+  },
+  {
+    "tid": 32,
+    "name_en": "Road Department",
+    "name_mr": "पथ विभाग",
+    "slug": "road",
+    "code": "road"
+  },
+  {
+    "tid": 34,
+    "name_en": "Skysign Department",
+    "name_mr": "आकाशचिन्ह व परवाना विभाग",
+    "slug": "skysign",
+    "code": "skysign"
+  },
+  {
+    "tid": 35,
+    "name_en": "Social Development Department",
+    "name_mr": "समाज विकास विभाग",
+    "slug": "social-development",
+    "code": "social-dev"
+  },
+  {
+    "tid": 36,
+    "name_en": "Solid Waste Management",
+    "name_mr": "घनकचरा व्यवस्थापन विभाग",
+    "slug": "solid-waste-management",
+    "code": "swm"
+  },
+  {
+    "tid": 37,
+    "name_en": "Sports Department",
+    "name_mr": "क्रीडा विभाग",
+    "slug": "sports",
+    "code": "sports"
+  },
+  {
+    "tid": 38,
+    "name_en": "Tree Authority Department",
+    "name_mr": "वृक्ष प्राधिकरण विभाग",
+    "slug": "tree",
+    "code": "tree"
+  },
+  {
+    "tid": 39,
+    "name_en": "Water Supply Department",
+    "name_mr": "पाणीपुरवठा विभाग",
+    "slug": "water",
+    "code": "water"
+  },
+  {
+    "tid": 40,
+    "name_en": "Secondary and Technical Education",
+    "name_mr": "शिक्षणाधिकारी (माध्यमिक व तांत्रिक) विभाग",
+    "slug": "secondary",
+    "code": "secondary-edu"
+  },
+  {
+    "tid": 248,
+    "name_en": "Municipal Commissioner Office",
+    "name_mr": "महापालिका आयुक्त कार्यालय",
+    "slug": "municipal-commissioner-office",
+    "code": "mc-office"
+  },
+  {
+    "tid": 249,
+    "name_en": "Additional Municipal Commissioner (General)",
+    "name_mr": "अतिरिक्त महापालिका आयुक्त (जनरल) कार्यालय",
+    "slug": "additional-municipal-commissioner-(general)",
+    "code": "amc-general"
+  },
+  {
+    "tid": 250,
+    "name_en": "Additional Municipal Commissioner (Estate)",
+    "name_mr": "अतिरिक्त महापालिका आयुक्त (इस्टेट) कार्यालय",
+    "slug": "additional-municipal-commissioner-(estate)",
+    "code": "amc-estate"
+  },
+  {
+    "tid": 251,
+    "name_en": "Vigilance Department",
+    "name_mr": "दक्षता विभाग",
+    "slug": "vigilance-department",
+    "code": "vigilance"
+  },
+  {
+    "tid": 252,
+    "name_en": "City Engineer Office",
+    "name_mr": "शहर अभियंता कार्यालय",
+    "slug": "city-engineer-office",
+    "code": "city-engineer"
+  },
+  {
+    "tid": 255,
+    "name_en": "Transport Planning Department",
+    "name_mr": "वाहतूक नियोजन विभाग",
+    "slug": "transport-planning-department",
+    "code": "transport-planning"
+  },
+  {
+    "tid": 257,
+    "name_en": "Taxation and Tax Collection Department",
+    "name_mr": "कर आकारणी व कर संकलन विभाग",
+    "slug": "ptax",
+    "code": "ptax"
+  },
+  {
+    "tid": 259,
+    "name_en": "Land Acquisition",
+    "name_mr": "भूसंपादन व व्यवस्थापन विभाग",
+    "slug": "land-acquisition",
+    "code": "land-acq"
+  },
+  {
+    "tid": 260,
+    "name_en": "Social Welfare Department",
+    "name_mr": "समाज कल्याण विभाग",
+    "slug": "social-welfare",
+    "code": "social-welfare"
+  },
+  {
+    "tid": 262,
+    "name_en": "Security Department",
+    "name_mr": "सुरक्षा विभाग",
+    "slug": "security-department",
+    "code": "security"
+  },
+  {
+    "tid": 263,
+    "name_en": "Drainage Department",
+    "name_mr": "मलनिःसारण विभाग",
+    "slug": "drainage",
+    "code": "drainage"
+  },
+  {
+    "tid": 265,
+    "name_en": "Legal Adviser",
+    "name_mr": "विधी विभाग",
+    "slug": "legal-adviser",
+    "code": "legal"
+  },
+  {
+    "tid": 293,
+    "name_en": "Additional Municipal Commissioner (Special)",
+    "name_mr": "अतिरिक्त महापालिका आयुक्त (विशेष) कार्यालय",
+    "slug": "additional-municipal-commissioner-(special)",
+    "code": "amc-special"
+  },
+  {
+    "tid": 310,
+    "name_en": "Chief Audit Department",
+    "name_mr": "मुख्य लेखा परीक्षक विभाग",
+    "slug": "chief-audit-department",
+    "code": "audit"
+  },
+  {
+    "tid": 339,
+    "name_en": "Electric vehicle Department",
+    "name_mr": "विद्युत वाहन विभाग",
+    "slug": "evcell",
+    "code": "ev"
+  },
+  {
+    "tid": 341,
+    "name_en": "Telephone Department",
+    "name_mr": "दूरध्वनी विभाग",
+    "slug": "telephone-department",
+    "code": "telephone"
+  },
+  {
+    "tid": 342,
+    "name_en": "Technical Department",
+    "name_mr": "तांत्रिक विभाग",
+    "slug": "technical-department",
+    "code": "technical"
+  },
+  {
+    "tid": 343,
+    "name_en": "Tender Cell",
+    "name_mr": "टेंडर सेल",
+    "slug": "tender-cell",
+    "code": "tender-cell"
+  },
+  {
+    "tid": 344,
+    "name_en": "DMC Zone No. 5",
+    "name_mr": "उप आयुक्त परिमंडळ क्र ५",
+    "slug": "dmc-zone-no.-5",
+    "code": "dmc-zone5"
+  },
+  {
+    "tid": 345,
+    "name_en": "DMC Zone No. 4",
+    "name_mr": "उप आयुक्त परिमंडळ क्र ४",
+    "slug": "dmc-zone-no.-4",
+    "code": "dmc-zone4"
+  },
+  {
+    "tid": 346,
+    "name_en": "DMC Zone No. 3",
+    "name_mr": "उप आयुक्त परिमंडळ क्र ३",
+    "slug": "dmc-zone-no.-3",
+    "code": "dmc-zone3"
+  },
+  {
+    "tid": 347,
+    "name_en": "DMC Zone No. 2",
+    "name_mr": "उप आयुक्त परिमंडळ क्र २",
+    "slug": "dmc-zone-no.-2",
+    "code": "dmc-zone2"
+  },
+  {
+    "tid": 348,
+    "name_en": "DMC Zone No. 1",
+    "name_mr": "उप आयुक्त परिमंडळ क्र १",
+    "slug": "dmc-zone-no.-1",
+    "code": "dmc-zone1"
+  },
+  {
+    "tid": 349,
+    "name_en": "Cattle Shield",
+    "name_mr": "कोंडवाडा विभाग",
+    "slug": "cattle-shed",
+    "code": "cattle-shed"
+  },
+  {
+    "tid": 350,
+    "name_en": "Mandai Department",
+    "name_mr": "मंडई विभाग",
+    "slug": "market-department",
+    "code": "mandai"
+  },
+  {
+    "tid": 351,
+    "name_en": "Press Department",
+    "name_mr": "मुद्रणालय विभाग",
+    "slug": "press-department",
+    "code": "press"
+  },
+  {
+    "tid": 352,
+    "name_en": "Public Relation Officer",
+    "name_mr": "जनसंपर्क अधिकारी",
+    "slug": "public-relation-officer",
+    "code": "pro"
+  },
+  {
+    "tid": 353,
+    "name_en": "Chawl Department",
+    "name_mr": "चाळ विभाग",
+    "slug": "chawl-department",
+    "code": "chawl"
+  },
+  {
+    "tid": 354,
+    "name_en": "Local Body Tax",
+    "name_mr": "स्थानिक संस्था कर",
+    "slug": "local-body-tax",
+    "code": "lbt"
+  },
+  {
+    "tid": 640,
+    "name_en": "Deputy Commissioner (Special)",
+    "name_mr": "उप आयुक्त (विशेष) विभाग",
+    "slug": "deputy-commissioner-special",
+    "code": "dc-special"
+  },
+  {
+    "tid": 641,
+    "name_en": "Aundh Baner Ward Office",
+    "name_mr": "औंध बाणेर क्षेत्रिय कार्यालय",
+    "slug": "aundh-baner-ward-office",
+    "code": "ward-aundh-baner"
+  },
+  {
+    "tid": 642,
+    "name_en": "Bibwewadi Ward Office",
+    "name_mr": "बिबवेवाडी क्षेत्रिय कार्यालय",
+    "slug": "bibwewadi-ward-office",
+    "code": "ward-bibwewadi"
+  },
+  {
+    "tid": 643,
+    "name_en": "Dhole Patil Road Ward Office",
+    "name_mr": "ढोले पाटील रोड क्षेत्रिय कार्यालय",
+    "slug": "dhole-patil-road-ward-office",
+    "code": "ward-dhole-patil"
+  },
+  {
+    "tid": 644,
+    "name_en": "Kothrud Bavdhan Ward Office",
+    "name_mr": "कोथरूड बावधन क्षेत्रिय कार्यालय",
+    "slug": "kothrud-bavdhan-ward-office",
+    "code": "ward-kothrud-bavdhan"
+  },
+  {
+    "tid": 645,
+    "name_en": "Nagar Road - Wagholi Ward Office",
+    "name_mr": "नगररोड - वाघोली क्षेत्रिय कार्यालय",
+    "slug": "nagar-road-wagholi-ward-office",
+    "code": "ward-nagar-road"
+  },
+  {
+    "tid": 646,
+    "name_en": "Warje Karvenagar Ward Office",
+    "name_mr": "वारजे कर्वेनगर क्षेत्रिय कार्यालय",
+    "slug": "warje-karvenagar-ward-office",
+    "code": "ward-warje"
+  },
+  {
+    "tid": 647,
+    "name_en": "Yerawada - Vadgaonsheri Ward Office",
+    "name_mr": "येरवडा - वडगावशेरी क्षेत्रिय कार्यालय",
+    "slug": "yerawada-vadgaonsheri-ward-office",
+    "code": "ward-yerawada"
+  },
+  {
+    "tid": 648,
+    "name_en": "Kasaba Peth Ward Office",
+    "name_mr": "कसबा पेठ क्षेत्रिय कार्यालय",
+    "slug": "kasaba-peth-ward-office",
+    "code": "ward-kasaba"
+  },
+  {
+    "tid": 649,
+    "name_en": "Dhankawadi - Katraj - Ambegaon Ward Office",
+    "name_mr": "धनकवडी - कात्रज - आंबेगाव क्षेत्रिय कार्यालय",
+    "slug": "dhankawadi-katraj-ambegaon-ward-office",
+    "code": "ward-dhankawadi"
+  },
+  {
+    "tid": 650,
+    "name_en": "Ch. Shivajinagar – Ghole Road Ward office",
+    "name_mr": "छ. शिवाजीनगर - घोलेरोड क्षेत्रिय कार्यालय",
+    "slug": "ch-shivajinagar-ghole-road-ward-office",
+    "code": "ward-shivajinagar"
+  },
+  {
+    "tid": 651,
+    "name_en": "Hadapsar - Manjari Ward Office",
+    "name_mr": "हडपसर - मांजरी क्षेत्रिय कार्यालय",
+    "slug": "hadapsar-manjari-ward-office",
+    "code": "ward-hadapsar"
+  },
+  {
+    "tid": 652,
+    "name_en": "Vishrambaugwada Ward Office",
+    "name_mr": "विश्रामबागवाडा क्षेत्रिय कार्यालय",
+    "slug": "vishrambaugwada-ward-office",
+    "code": "ward-vishrambaug"
+  },
+  {
+    "tid": 653,
+    "name_en": "Kondhwa - Undri Ward Office",
+    "name_mr": "कोंढवा - उंड्री क्षेत्रिय कार्यालय",
+    "slug": "kondhwa-undri-ward-office",
+    "code": "ward-kondhwa"
+  },
+  {
+    "tid": 654,
+    "name_en": "Sinhgad Road Ward Office",
+    "name_mr": "सिंहगड रोड क्षेत्रिय कार्यालय",
+    "slug": "sinhgad-road-ward-office",
+    "code": "ward-sinhgad"
+  },
+  {
+    "tid": 655,
+    "name_en": "Wanawadi Ward Office",
+    "name_mr": "वानवडी क्षेत्रिय कार्यालय",
+    "slug": "wanawadi-ward-office",
+    "code": "ward-wanawadi"
+  },
+  {
+    "tid": 656,
+    "name_en": "Backward Cell",
+    "name_mr": "मागासवर्ग विभाग",
+    "slug": "backward-cell",
+    "code": "backward"
+  },
+  {
+    "tid": 657,
+    "name_en": "Training Academy",
+    "name_mr": "प्रशिक्षण प्रबोधिनी",
+    "slug": "training-academy",
+    "code": "training"
+  },
+  {
+    "tid": 658,
+    "name_en": "Town Planning and Development Department",
+    "name_mr": "जिल्हा नियोजन व विकास समिती विभाग",
+    "slug": "town-planning-and-development",
+    "code": "town-planning"
+  },
+  {
+    "tid": 659,
+    "name_en": "Tender Cell",
+    "name_mr": "निविदा विभाग",
+    "slug": "tender-cell",
+    "code": "tender"
+  },
+  {
+    "tid": 660,
+    "name_en": "Medical Education Trust",
+    "name_mr": "वैद्यकीय शिक्षण ट्रस्ट",
+    "slug": "medical-education-trust",
+    "code": "med-edu-trust"
+  },
+  {
+    "tid": 1409,
+    "name_en": "Rajiv Gandhi Zoological Park & Wildlife Research Center",
+    "name_mr": "राजीव गांधी प्राणीसंग्रहालय आणि वन्यजीव संशोधन केंद्र",
+    "slug": "zoo",
+    "code": "zoo"
+  },
+  {
+    "tid": 1412,
+    "name_en": "District Planning & Development Committee",
+    "name_mr": "जिल्हा नियोजन व विकास समिती विभाग",
+    "slug": "district-planning-development-committee",
+    "code": "dpdc"
+  },
+  {
+    "tid": 1422,
+    "name_en": "Merged 32 Villages",
+    "name_mr": "समाविष्ट ३२ गावे",
+    "slug": "Merged-32-Villages",
+    "code": "merged-villages"
+  },
+  {
+    "tid": 1489,
+    "name_en": "Swargate No. 1",
+    "name_mr": "स्वारगेट क्र. ०१",
+    "slug": "swargate-no-1",
+    "code": "swargate-1"
+  },
+  {
+    "tid": 1490,
+    "name_en": "Swargate No. 2",
+    "name_mr": "स्वारगेट क्र. २",
+    "slug": "swargate-no-2",
+    "code": "swargate-2"
+  },
+  {
+    "tid": 1491,
+    "name_en": "Lashkar",
+    "name_mr": "लष्कर",
+    "slug": "lashkar",
+    "code": "lashkar"
+  },
+  {
+    "tid": 1492,
+    "name_en": "Bund Garden",
+    "name_mr": "बंडगार्डन",
+    "slug": "bund-garden",
+    "code": "bund-garden"
+  },
+  {
+    "tid": 1493,
+    "name_en": "Chaturshrungi",
+    "name_mr": "चतु:शृंगी",
+    "slug": "chaturshrungi",
+    "code": "chaturshrungi"
+  },
+  {
+    "tid": 1494,
+    "name_en": "SNDT",
+    "name_mr": "एस.एन.डी.टी.",
+    "slug": "sndt",
+    "code": "sndt"
+  }
+]

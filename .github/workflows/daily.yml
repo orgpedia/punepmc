@@ -1,0 +1,53 @@
+name: daily
+
+on:
+  schedule:
+    - cron: "0 16 * * *"  # 21:30 IST
+  workflow_dispatch:
+
+# daily and backfill share one group so no two runs write the state files at the same time
+concurrency:
+  group: punepmc-state
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+      IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - run: make install
+
+      - run: make daily
+
+      - name: Commit state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add input/documents
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -q -m "circulars: daily $(date -u +%F)"
+          git pull --rebase -q
+          git push -q
+
+      - name: Upload logs and raw API responses
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-${{ github.run_id }}
+          path: |
+            input/logs/*.log
+            LFS/punePMC/api/
+          retention-days: 30
+          if-no-files-found: ignore

@@ -1,0 +1,37 @@
+[
+  {
+    "nid": 9876,
+    "dept_code": "mc-office",
+    "note": "no department on site; letterhead 'महापालिका आयुक्त कार्यालय'"
+  },
+  {
+    "nid": 9918,
+    "dept_code": "election",
+    "note": "no department on site; Form 1 election notice, Returning Officer, 215 Kasba Peth"
+  },
+  {
+    "nid": 10541,
+    "dept_code": "lbt",
+    "note": "no department on site; letterhead 'स्थानिक संस्था कर कार्यालय'"
+  },
+  {
+    "nid": 10698,
+    "dept_code": "mc-office",
+    "note": "no department on site; letterhead 'महापालिका आयुक्त कार्यालय'"
+  },
+  {
+    "nid": 10778,
+    "dept_code": "ward-hadapsar",
+    "note": "no department on site; letterhead 'सहायक आयुक्त कार्यालय हडपसर-मुंढवा'"
+  },
+  {
+    "nid": 36369,
+    "date": "2016-10-06",
+    "note": "site shows 0016-10-06; handwritten date ०६/१०/२०१६ on the letter"
+  },
+  {
+    "nid": 36823,
+    "date": "2016-03-10",
+    "note": "site has no date; letter dated १०/०३/२०१६"
+  }
+]
