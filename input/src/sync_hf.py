@@ -19,12 +19,14 @@ from common import (
     PDFS_DIR,
     SOURCE_PAGE,
     active,
+    FORMATS,
+    doc_path,
+    file_ext,
     hf_settings,
     is_new,
-    link_pdf,
+    link_file,
     load_env,
     parse_window,
-    pdf_path,
     read_records,
     rel_path,
 )
@@ -60,6 +62,9 @@ metadata files here.
 |---|---|
 | `{HF_PREFIX}/<YYYY>/<doc_id>.pdf` | circulars from {SOURCE_PAGE} |
 
+A few circulars were posted by PMC as JPEG images or Word files; they are kept as they are, under the same
+folder with their own extension (`.jpg`, `.png`, `.doc`, `.docx`).
+
 ## Naming
 
 `doc_id = <dept_code>.<YYYY-Mon-DD>.<NN>`, e.g. `gad.2019-May-31.01`:
@@ -83,16 +88,17 @@ circular, the file is overwritten here and the previous version stays in the rep
 def pull(repo_id, token, args):
     print(f"*** Downloading {repo_id} -> {LFS_DIR}")
     snapshot_download(repo_id=repo_id, repo_type="dataset", local_dir=LFS_DIR, allow_patterns=ALLOW_PATTERNS, token=token)
-    circulars, linked, missing = read_records("circulars"), 0, []
+    circulars, downloads, linked, missing = read_records("circulars"), read_records("downloads"), 0, []
     for rec in circulars.values():
         if not active(rec):
             continue
-        if pdf_path(rec["doc_id"]).exists():
-            link_pdf(rec["doc_id"])
+        ext = file_ext(downloads.get(rec["fid"]))
+        if doc_path(rec["doc_id"], ext).exists():
+            link_file(rec["doc_id"], ext)
             linked += 1
         else:
             missing.append(rec["doc_id"])
-    print(f"*** Linked {linked} PDFs into input/documents")
+    print(f"*** Linked {linked} of {linked + len(missing)} files into input/documents")
     if missing:
         print(f"*** WARNING not on HF / not local: {len(missing)} {missing[:20]}")
 
@@ -100,17 +106,20 @@ def pull(repo_id, token, args):
 def push(repo_id, token, args):
     if args.scope == "new":
         window = parse_window(args.window)
-        paths = sorted({rel_path(r["doc_id"]) for r in read_records("circulars").values() if is_new(r, window)})
+        downloads = read_records("downloads")
+        paths = sorted({rel_path(r["doc_id"], file_ext(downloads.get(r["fid"])))
+                        for r in read_records("circulars").values() if is_new(r, window)})
         paths = [p for p in paths if (LFS_DIR / p).is_file()]
         allow, files = paths, paths
     else:
-        allow, files = ALLOW_PATTERNS, ([p for p in PDFS_DIR.rglob("*.pdf")] if PDFS_DIR.exists() else [])
+        allow = ALLOW_PATTERNS
+        files = [p for p in PDFS_DIR.rglob("*") if p.is_file() and p.suffix[1:] in FORMATS] if PDFS_DIR.exists() else []
     if not files:
-        print(f"*** No PDFs to push (scope={args.scope})")
+        print(f"*** No files to push (scope={args.scope})")
         return
     api = HfApi(token=token)
     api.create_repo(repo_id, repo_type="dataset", exist_ok=True)
-    print(f"*** Uploading {len(files)} local PDFs -> {repo_id} (scope={args.scope}; unchanged files are skipped)")
+    print(f"*** Uploading {len(files)} local files -> {repo_id} (scope={args.scope}; unchanged files are skipped)")
     if len(files) > LARGE_PUSH:
         api.upload_large_folder(repo_id=repo_id, repo_type="dataset", folder_path=LFS_DIR, allow_patterns=allow)
         print("*** Done (upload_large_folder)")

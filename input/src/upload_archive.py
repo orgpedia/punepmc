@@ -4,8 +4,8 @@ Usage:
     upload_archive.py [--scope new|all] [--window 7d] [--limit N] [--collection opensource]
     upload_archive.py --update-metadata [--collection opensource]
 
-Item identifier: in.gov.pmc.circular.<doc_id>, file <doc_id>.pdf. A replaced PDF (new fid) is uploaded
-under the same name; archive.org keeps the old one in history/files/.
+Item identifier: in.gov.pmc.circular.<doc_id>, file <doc_id>.<ext> (pdf, or jpg / png / doc / docx as PMC posted it).
+A replaced file (new fid) is uploaded under the same name; archive.org keeps the old one in history/files/.
 --scope new  only circulars first seen within --window (the daily run); all = the whole backlog.
 --update-metadata only calls modify_metadata for items whose metadata hash changed.
 """
@@ -23,7 +23,8 @@ from common import (
     SOURCE_PAGE,
     active,
     effective,
-    ensure_pdf,
+    ensure_file,
+    file_ext,
     identifier_for,
     is_new,
     load_env,
@@ -68,7 +69,7 @@ def build_metadata(rec, d, wb, depts, overrides, collection):
     if d.get("download_time_utc"):
         rows.append(row("Downloaded", html.escape(d["download_time_utc"])))
     if rec.get("same_file_as"):
-        rows.append(row("Same PDF also posted as", ", ".join(
+        rows.append(row("Same file also posted as", ", ".join(
             link(f"https://archive.org/details/{identifier_for(i)}", i) for i in rec["same_file_as"])))
     description = (
         f"<p>Circular of the {html.escape(dept or 'Pune Municipal Corporation')}, {PMC_EN}"
@@ -94,6 +95,7 @@ def build_metadata(rec, d, wb, depts, overrides, collection):
         "pmc_nid": str(rec["nid"]),
         "pmc_fid": str(rec["fid"]),
         "sha1": d.get("sha1", ""),
+        "pmc_file_format": file_ext(d),
         "pmc_same_file_as": rec.get("same_file_as") or [],
         "wayback_url": wayback_url,
         "description": description,
@@ -163,9 +165,9 @@ def run_upload(args, keys, circulars, downloads, wayback, archive, depts, overri
         record = {"doc_id": doc_id, "fid": fid, "identifier": identifier, "collection": args.collection,
                   "sha1": d.get("sha1"), "time_utc": utc_now()}
         try:
-            path = ensure_pdf(doc_id, d)
+            path = ensure_file(doc_id, d)
             metadata = build_metadata(rec, d, wayback.get(fid, {}), depts, overrides, args.collection)
-            upload(identifier, f"{doc_id}.pdf", path, metadata, keys)
+            upload(identifier, f"{doc_id}.{file_ext(d)}", path, metadata, keys)
             if doc_id in have_item:  # metadata in an upload only applies when the item is created
                 modify(identifier, metadata, keys)
             have_item.add(doc_id)
@@ -189,28 +191,30 @@ def run_upload(args, keys, circulars, downloads, wayback, archive, depts, overri
 
 
 def run_update_metadata(args, keys, circulars, downloads, wayback, archive, depts, overrides):
-    updated, failed, unchanged = [], [], 0
+    updated, failed, todo, uploaded = [], [], [], 0
     for nid in sorted(circulars):
         rec = circulars[nid]
         a = archive.get((rec.get("doc_id"), rec.get("fid")))
         if not active(rec) or not a or not a.get("upload_success"):
             continue
+        uploaded += 1
         metadata = build_metadata(rec, downloads.get(rec["fid"], {}), wayback.get(rec["fid"], {}), depts, overrides,
                                   args.collection)
         h = metadata_hash(metadata)
-        if h == a.get("metadata_sha1"):
-            unchanged += 1
-            continue
+        if h != a.get("metadata_sha1"):
+            todo.append((rec, a, metadata, h))
+    print(f"*** Metadata changed: {len(todo)} of {uploaded} items on archive.org")
+
+    for idx, (rec, a, metadata, h) in enumerate(todo):
         try:
             modify(a["identifier"], metadata, keys)
             a.update(metadata_sha1=h, collection=args.collection, metadata_time_utc=utc_now())
             updated.append(rec["doc_id"])
-            print(f"{rec['doc_id']}: metadata updated")
+            print(f"{rec['doc_id']} [{idx + 1}/{len(todo)}]: metadata updated")
         except Exception as e:
             failed.append(rec["doc_id"])
-            print(f"{rec['doc_id']}: FAILED {e}")
+            print(f"{rec['doc_id']} [{idx + 1}/{len(todo)}]: FAILED {e}")
         save_records("archive", archive)
-    print(f"*** Metadata unchanged: {unchanged}")
     return updated, failed
 
 

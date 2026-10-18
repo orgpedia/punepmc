@@ -10,7 +10,7 @@ import argparse
 import sys
 from collections import Counter
 
-from common import IA_PREFIX, active, identifier_for, read_records
+from common import IA_PREFIX, active, file_ext, identifier_for, read_records
 
 
 def archive_org_identifiers():
@@ -36,8 +36,12 @@ def main(args):
     print(f"\ton site: {len(on_site)}   removed from site: {len(circulars) - len(on_site)}")
     for s, n in sorted(statuses.items(), key=lambda x: str(x[0])):
         print(f"\t{s}: {n}")
-    print(f"*** Files (unique PDFs of ok circulars): {len(fids)}")
-    print(f"\tdownloaded: {len(done)}   failed: {len(failed)}   pending: {len(fids) - len(done) - len(failed)}")
+    print(f"*** Files (unique files of ok circulars): {len(fids)}")
+    print(f"\tdownloaded: {len(done)} / {len(fids)}   failed: {len(failed)}   pending: {len(fids) - len(done) - len(failed)}")
+    print(f"\tdownloaded by type: {dict(Counter(file_ext(downloads[f]) for f in done).most_common())}")
+    reasons = Counter(downloads[f]["status"] for f in failed)
+    if reasons:
+        print(f"\tfailed by reason: {dict(reasons)}")
     print(f"*** Wayback: linked {len(linked)} / {len(done)}   pending {len(done) - len(linked)}")
     print(f"*** archive.org: uploaded {len(uploaded)} / {len(act)}   pending {len(act) - len(uploaded)}")
 

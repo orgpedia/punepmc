@@ -260,20 +260,21 @@ def main(args):
         after = max(circulars)  # nids only grow; known circulars are not re-read
         print(f"*** New circulars only: nid > {after}")
 
+    pages = f"/~{-(-len(circulars) // 50)}" if full and circulars else ""  # estimate from the known count
     try:
         for idx, page in enumerate(iter_api(NODE_API, node_params(after), "en", dump_dir)):
             for node in parse_nodes(page):
                 upsert(circulars, node, now, log, new_nids)
                 seen.add(node["nid"])
             save_records("circulars", circulars)
-            print(f"\ten page {idx + 1}: {len(seen)} nodes")
+            print(f"\ten page {idx + 1}{pages}: {len(seen)} nodes")
 
         mr_seen = 0
         for idx, page in enumerate(iter_api(NODE_API, title_params(after), "mr", dump_dir)):
             update_mr(circulars, page, log, new_nids)
             mr_seen += len(page.get("data", []))
             save_records("circulars", circulars)
-            print(f"\tmr page {idx + 1}: {mr_seen} nodes")
+            print(f"\tmr page {idx + 1}{pages}: {mr_seen} of {len(seen)} nodes")
     finally:
         write_records("circulars", circulars)  # pages are in nid order, so a partial run resumes cleanly
 

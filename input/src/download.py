@@ -1,28 +1,31 @@
-"""Download the current PDF of every active circular, once per file id (fid).
+"""Download the current file of every active circular, once per file id (fid).
 
 Usage: download.py [--scope new|all] [--window 7d] [--retry-failed] [--delay 1]
 
 --scope new  only files of circulars first seen within --window (the daily run); all = every current file.
 
-The file goes to LFS/punePMC/publications/circulars/pdfs/<YYYY>/<doc_id>.pdf; other doc_ids that
+The file goes to LFS/punePMC/publications/circulars/pdfs/<YYYY>/<doc_id>.<ext>, where ext is its actual
+type (pdf, or jpg / png / doc / docx for the few circulars PMC posted that way); other doc_ids that
 share the fid get hardlinks to it. A replaced file (new fid) overwrites the old version in place.
-404 and non-PDF responses are not retried until the fid changes, or with --retry-failed.
+404 and unknown-type responses (e.g. HTML) are not retried until the fid changes, or with --retry-failed.
 """
 
 import argparse
 import os
+from collections import Counter
 import sys
 import time
 
 from common import (
     LFS_DIR,
+    doc_path,
     fetch_file,
+    file_ext,
     group_by_fid,
     hardlink,
     is_new,
-    link_pdf,
+    link_file,
     parse_window,
-    pdf_path,
     read_records,
     rel_path,
     save_records,
@@ -32,12 +35,13 @@ from common import (
 )
 
 DONE = ("downloaded", "seeded")
-PERSISTENT = ("failed:404", "failed:not_pdf")
+PERSISTENT = ("failed:404", "failed:unknown_type")  # an old failed:not_pdf is retried: it may be a JPEG / Word file
 
 
 def ensure_paths(d, recs):
     """Point every doc_id path of this fid at the same file (hardlinks), refresh symlinks."""
-    paths = [rel_path(r["doc_id"]) for r in recs]
+    ext = file_ext(d)
+    paths = [rel_path(r["doc_id"], ext) for r in recs]
     present = [LFS_DIR / p for p in paths if (LFS_DIR / p).is_file()]
     source = next((p for p in present if p.stat().st_size == d.get("size")), None)
     if source:
@@ -55,10 +59,10 @@ def ensure_paths(d, recs):
                 if target.stat().st_size == d.get("size") and sha1_file(target) == d.get("sha1"):
                     continue
             hardlink(source, target)
-    # else: PDF not in LFS (e.g. on CI); ensure_pdf() fetches it when a later step needs it
+    # else: file not in LFS (e.g. on CI); ensure_file() fetches it when a later step needs it
     for r in recs:
-        link_pdf(r["doc_id"])
-    d["nids"], d["paths"] = [r["nid"] for r in recs], paths
+        link_file(r["doc_id"], ext)
+    d["nids"], d["paths"], d["format"] = [r["nid"] for r in recs], paths, ext
 
 
 def main(args):
@@ -70,9 +74,11 @@ def main(args):
         window = parse_window(args.window)
         groups = {fid: recs for fid, recs in all_groups.items() if any(is_new(r, window) for r in recs)}
 
-    todo = [fid for fid in groups if downloads.get(fid, {}).get("status") not in DONE]
+    status = {fid: downloads.get(fid, {}).get("status") for fid in groups}
+    todo = [fid for fid, s in status.items() if s not in DONE and (args.retry_failed or s not in PERSISTENT)]
+    done = sum(1 for s in status.values() if s in DONE)
     print(f"*** scope={args.scope}: {len(groups)} files for {sum(map(len, groups.values()))} circulars; "
-          f"{len(todo)} not downloaded yet")
+          f"{done} already downloaded, {len(todo)} to download now, {len(groups) - done - len(todo)} skipped (404 / unknown type)")
 
     downloaded, skipped_failed, not_found, failed = [], [], [], []
     try:
@@ -87,9 +93,9 @@ def main(args):
                 continue
 
             first = recs[0]
-            url, dest = first["file_url"], pdf_path(first["doc_id"])
-            print(f"fid {fid} [{len(downloaded) + len(failed) + len(not_found) + 1}] {first['doc_id']} {url}")
-            info, error = fetch_file(url, dest)
+            url = first["file_url"]
+            print(f"fid {fid} [{len(downloaded) + len(failed) + len(not_found) + 1}/{len(todo)}] {first['doc_id']} {url}")
+            info, error = fetch_file(url, doc_path(first["doc_id"]))
             attempts = (d or {}).get("attempts", 0) + 1
 
             if not info:
@@ -111,6 +117,7 @@ def main(args):
 
             if first.get("filesize") and info["size"] != first["filesize"]:
                 print(f"\tWARNING size {info['size']} differs from API filesize {first['filesize']}")
+            dest = info["path"]
             d = downloads[fid] = {
                 "fid": fid,
                 "nids": [],
@@ -122,12 +129,13 @@ def main(args):
                 "etag": info["etag"],
                 "download_time_utc": utc_now(),
                 "status": "downloaded",
+                "format": info["format"],
                 "attempts": attempts,
                 "current": True,
             }
             ensure_paths(d, recs)
             downloaded.append(fid)
-            print(f"\tok ({info['size']} bytes, {len(recs)} doc_id{'s' if len(recs) > 1 else ''})")
+            print(f"\tok {info['format']} ({info['size']} bytes, {len(recs)} doc_id{'s' if len(recs) > 1 else ''})")
             save_records("downloads", downloads)
             time.sleep(args.delay)
     finally:
@@ -135,10 +143,13 @@ def main(args):
             d["current"] = fid in all_groups
         write_records("downloads", downloads)
 
-    print(f"*** Downloaded: {len(downloaded)}")
-    print(f"*** Not retried (404 / not a PDF, use RETRY_FAILED=1): {len(skipped_failed)}")
-    print(f"*** 404 / not a PDF this run: {len(not_found)} {not_found[:20]}")
+    formats = Counter(downloads[f].get("format") for f in downloaded)
+    print(f"*** Downloaded: {len(downloaded)} of {len(todo)} {dict(formats) if formats else ''}")
+    print(f"*** Not retried (404 / unknown type, use RETRY_FAILED=1): {len(skipped_failed)}")
+    print(f"*** 404 / unknown type this run: {len(not_found)} {not_found[:20]}")
     print(f"*** Failed: {len(failed)} {failed[:20]}")
+    have = sum(1 for fid in groups if downloads.get(fid, {}).get("status") in DONE)
+    print(f"*** Files downloaded: {have} of {len(groups)} (scope={args.scope}); not downloaded: {len(groups) - have}")
     sys.exit(1 if failed else 0)
 
 

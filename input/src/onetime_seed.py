@@ -18,8 +18,8 @@ from pathlib import Path
 
 from common import (
     group_by_fid,
+    doc_path,
     looks_like_pdf,
-    pdf_path,
     read_records,
     rel_path,
     same_url,
@@ -79,15 +79,20 @@ def main(seed_dir):
     downloads = read_records("downloads")
     print(f"*** pmccirc: {len(pmccirc)} downloaded PDFs in {seed_dir}")
 
+    groups = group_by_fid(circulars)
+    todo = [fid for fid in groups if downloads.get(fid, {}).get("status") not in ("downloaded", "seeded")]
+    print(f"*** {len(groups)} current files; {len(groups) - len(todo)} already in LFS, {len(todo)} to look for in pmccirc")
+
     moved, deduped, left = 0, 0, Counter()
     try:
-        for fid, recs in group_by_fid(circulars).items():
-            if downloads.get(fid, {}).get("status") in ("downloaded", "seeded"):
-                continue
+        for idx, fid in enumerate(todo):
+            recs = groups[fid]
+            if (idx + 1) % 500 == 0:
+                print(f"\t[{idx + 1}/{len(todo)}] moved {moved}")
 
             first, first_sha1, first_src = None, None, None
             for rec in recs:  # a copy already moved by an interrupted run counts as the first one
-                dest = pdf_path(rec["doc_id"])
+                dest = doc_path(rec["doc_id"])
                 if dest.is_file() and (not rec.get("filesize") or dest.stat().st_size == rec["filesize"]) and looks_like_pdf(dest):
                     first, first_sha1, first_src = dest, sha1_file(dest), "LFS (earlier seed run)"
                     break
@@ -101,12 +106,10 @@ def main(seed_dir):
                         left[reason] += 1
                     continue
                 if first is None:
-                    dest = pdf_path(rec["doc_id"])
+                    dest = doc_path(rec["doc_id"])
                     move(src, dest)
                     first, first_sha1, first_src = dest, sha1_file(dest), src
                     moved += 1
-                    if moved % 500 == 0:
-                        print(f"\tmoved {moved}")
                 elif sha1_file(src) == first_sha1:
                     src.unlink()  # identical copy; download.py hardlinks this doc_id to `first`
                     deduped += 1
@@ -127,6 +130,7 @@ def main(seed_dir):
                 "etag": None,
                 "download_time_utc": mtime.strftime("%Y-%m-%d %H:%M:%S %Z%z"),
                 "status": "seeded",
+                "format": "pdf",
                 "attempts": 0,
                 "current": True,
                 "seeded_from": str(first_src),
@@ -135,7 +139,7 @@ def main(seed_dir):
     finally:
         write_records("downloads", downloads)
 
-    print(f"*** Moved: {moved} PDFs (one per file id)")
+    print(f"*** Moved: {moved} PDFs (one per file id) of {len(todo)} files not yet in LFS")
     print(f"*** Deleted from pmccirc as identical copies of a moved PDF: {deduped}")
     print(f"*** Left in pmccirc: {sum(left.values())} {dict(left)}")
     print("*** Next: make download (hardlinks shared PDFs and downloads the rest)")

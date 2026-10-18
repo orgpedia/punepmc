@@ -81,8 +81,12 @@ Each website entry with a file gets a **doc_id** when it is first seen. The doc_
 ```
 doc_id     = <dept_code>.<YYYY-Mon-DD>.<NN>             e.g.  gad.2019-May-31.01
 archive.org: in.gov.pmc.circular.<doc_id>               e.g.  in.gov.pmc.circular.gad.2019-May-31.01
-HF / LFS   : publications/circulars/pdfs/<YYYY>/<doc_id>.pdf
+HF / LFS   : publications/circulars/pdfs/<YYYY>/<doc_id>.<ext>   ext = pdf, or jpg / png / doc / docx
 ```
+
+- **ext** is the file's actual type, detected from its first bytes (not its name). Almost all are PDFs; PMC posted 13 circulars
+  (10 files) as JPEG images and 3 as Word files (`.doc`, `.docx`). They are kept in their original format, so processing can use the image
+  itself, and stay in the same `pdfs/` folder. `downloads.json` records the type as `format`.
 
 - **dept_code** is the code column in the department table below (`departments.json`).
 - **date** is `field_circular_date` written as `YYYY-Mon-DD`, with a three-letter English month (`Jan` … `Dec`).
@@ -244,7 +248,7 @@ punepmc/
 │   └── backfill.yml          # manual (+ cron for wayback) → make backfill WHAT=<what>
 ├── input/
 │   ├── src/
-│   │   ├── common.py         # paths, constants, http session, JSON:API paging, json/symlink helpers, doc_id rules, ensure_pdf()
+│   │   ├── common.py         # paths, constants, http session, JSON:API paging, json/symlink helpers, doc_id rules, file types, ensure_file()
 │   │   ├── fetch.py          # new only (default) | --full
 │   │   ├── onetime_seed.py   # one-time: move matching PDFs from ../pmccirc
 │   │   ├── download.py
@@ -274,7 +278,7 @@ punepmc/
   archive.org's `history/files/` and the Wayback capture of its old URL. `downloads.json` keeps the sha1 of every version.
 - The symlinks are committed, so they dangle until the PDFs are present, as in doptIASCivil.
 - **`LFS/` need not be complete.** A GitHub Actions run starts with an empty `LFS/`. Whenever a step needs a PDF that isn't there,
-  `ensure_pdf()` fetches it: first from HF (`hf_hub_download` of that one file), then from PMC. Daily and backfill runs therefore work without the 14 GB.
+  `ensure_file()` fetches it: first from HF (`hf_hub_download` of that one file), then from PMC. Daily and backfill runs therefore work without the 14 GB.
 
 ## 4. State files
 
@@ -302,9 +306,10 @@ Ctrl-C or SIGTERM (e.g. a cancelled GitHub Actions run), so an interrupted run c
 {"fid": 39576, "nids": [42808], "url": "…/732416102026.pdf",
  "paths": ["publications/circulars/pdfs/2026/gad.2026-Oct-16.01.pdf"], "size": 243225, "sha1": "…",
  "last_modified": "Fri, 16 Oct 2026 13:22:36 GMT", "etag": "\"6ad2251c-3b619\"",
- "download_time_utc": "…", "status": "downloaded", "attempts": 1, "current": true}
+ "download_time_utc": "…", "status": "downloaded", "format": "pdf", "attempts": 1, "current": true}
 ```
-- `status` is one of `downloaded`, `seeded`, `failed:<reason>` (`404`, `size_mismatch`, `not_pdf`, …).
+- `status` is one of `downloaded`, `seeded`, `failed:<reason>` (`404`, `unknown_type`, …).
+- `format` is `pdf`, `jpg`, `png`, `doc` or `docx`; a record without it is a PDF.
 - `paths` has one entry per doc_id using this fid (hardlinks).
 - `current` is false for versions that have been replaced.
 
@@ -375,14 +380,16 @@ the 5 repaired files), and fewer downloads than that because some share a PDF. I
 ### `download`
 With `SCOPE=new`, only fids of circulars first seen within `NEW_WINDOW`; with `SCOPE=all`, every current fid of an `ok`, non-removed entry.
 For each: if the fid already has a `downloaded`/`seeded` record, the script only ensures each doc_id path
-exists (hardlink, or `ensure_pdf()` on CI). Otherwise it downloads the file once:
+exists (hardlink, or `ensure_file()` on CI). Otherwise it downloads the file once:
 1. Streams to `<path>.part` (retries, `Range` resume), then sleeps `DOWNLOAD_DELAY`.
-2. Verifies the size against `Content-Length` and checks for `%PDF` in the first 1 KB. A mismatch with the API `filesize` is only a warning.
-   Then it computes the sha1 and renames the `.part` file over `<path>`. It hardlinks the other doc_id paths, sets `current` on the new fid and clears it on the old one.
+2. Verifies the size against `Content-Length` and detects the type from the first bytes: PDF, JPEG, PNG, Word (`.doc`) or Word (`.docx`).
+   Anything else (e.g. an HTML error page) is `failed:unknown_type`. A mismatch with the API `filesize` is only a warning.
+   Then it computes the sha1 and renames the `.part` file to `<doc_id>.<ext>`. It hardlinks the other doc_id paths, sets `current` on the new fid and clears it on the old one.
 3. Creates or updates the symlinks.
-4. On failure, it records `failed:<reason>` and increments `attempts`. `failed:404` and `failed:not_pdf` are retried only when the fid changes,
+4. On failure, it records `failed:<reason>` and increments `attempts`. `failed:404` and `failed:unknown_type` are retried only when the fid changes,
    or with `RETRY_FAILED=1`. Other failures are retried on the next run.
-5. Exits with a non-zero code on failures other than 404 / not_pdf (those only warn).
+5. Exits with a non-zero code on failures other than 404 / unknown type (those only warn).
+6. Progress lines show done / total (`fid 33514 [462/1107] …`), and the summary gives files downloaded of the total in scope.
 
 ### `link_wayback`
 For each fid without `link_success: true`, within `SCOPE`, oldest first, up to `LIMIT`. The steps follow doptIASCivil:
@@ -393,8 +400,8 @@ For each fid without `link_success: true`, within `SCOPE`, oldest first, up to `
 - The target only needs URLs, not PDFs.
 
 ### `upload_archive`
-For each `ok` doc_id whose current fid has no `upload_success`, within `SCOPE`, up to `LIMIT`: `ensure_pdf()`, then
-`internetarchive.upload("in.gov.pmc.circular.<doc_id>", files={"<doc_id>.pdf": path}, metadata=…, checksum=True, retries=5, retries_sleep=30)`.
+For each `ok` doc_id whose current fid has no `upload_success`, within `SCOPE`, up to `LIMIT`: `ensure_file()`, then
+`internetarchive.upload("in.gov.pmc.circular.<doc_id>", files={"<doc_id>.<ext>": path}, metadata=…, checksum=True, retries=5, retries_sleep=30)`.
 A replaced file is uploaded under the same name to the same item, and archive.org keeps the old one in `history/files/`.
 
 Metadata (built in one function):
@@ -402,7 +409,7 @@ Metadata (built in one function):
 | Field | Value |
 |---|---|
 | `collection` | `$(IA_COLLECTION)`: `opensource` (Community Texts) |
-| `mediatype` | `texts` |
+| `mediatype` | `texts`, for every file type: a JPEG of a circular is still a text, and all items stay in the same collection |
 | `title` | `title_en` if `title_en_is_english`, else `title_mr`. Replaced with the translation later, via `update_archive_metadata` |
 | `title_mr` | `title_mr` |
 | `title_en_site` | `title_en` as on the site, only when it is real English |
@@ -414,7 +421,8 @@ Metadata (built in one function):
 | `source` | `file_url` |
 | `source_page` | `https://www.pmc.gov.in/en/l/circular` |
 | `pmc_nid`, `pmc_fid`, `sha1` | ids and checksum |
-| `pmc_same_file_as` | the other doc_ids sharing this PDF (if any) |
+| `pmc_file_format` | `pdf`, `jpg`, `png`, `doc` or `docx` |
+| `pmc_same_file_as` | the other doc_ids sharing this file (if any) |
 | `wayback_url` | if linked |
 | `description` | HTML: both titles, department, date, then a table of source URL, Wayback URL and download date |
 
@@ -493,11 +501,11 @@ Shared:
 - `concurrency: group: punepmc-state, cancel-in-progress: false` in **both** workflows, so no two runs ever write the state files at the same time.
   When running locally, `git pull` first and push afterwards.
 - Secrets: `HF_TOKEN`, `IA_ACCESS_KEY`, `IA_SECRET_KEY`. They are passed as env vars, and `common.py` reads env first, then `.env`.
-- Runs start with an empty `LFS/`, and `ensure_pdf()` fills in only what that run needs (§3). Raw API snapshots are kept only as run artifacts on CI.
+- Runs start with an empty `LFS/`, and `ensure_file()` fills in only what that run needs (§3). Raw API snapshots are kept only as run artifacts on CI.
 
 ## 8. Hugging Face dataset `Orgpedia/punePMC`
 
-- Public. **Files only**: PDFs under `publications/circulars/pdfs/<YYYY>/<doc_id>.pdf`, plus `README.md`. There are no parquet, CSV or JSON metadata files.
+- Public. **Files only**: the circulars' files under `publications/circulars/pdfs/<YYYY>/<doc_id>.<ext>` (PDFs, plus the few JPEG / Word files), plus `README.md`. There are no parquet, CSV or JSON metadata files.
 - `README.md` front matter sets **`viewer: false`**, which turns off HF's dataset viewer and its automatic parquet conversion
   (`refs/convert/parquet`), so the repo stays plain files.
 - README body: what PMC circulars are, the source URL, the naming scheme (§2), the archive.org identifier pattern, the update schedule, and a pointer to the
@@ -508,7 +516,7 @@ Shared:
 
 | Variable | Used by | Notes |
 |---|---|---|
-| `HF_TOKEN` | sync_hf_push, hf_card, import, ensure_pdf | Needs write access to `Orgpedia/punePMC`. |
+| `HF_TOKEN` | sync_hf_push, hf_card, import, ensure_file | Needs write access to `Orgpedia/punePMC`. |
 | `HF_REPO_ID` | same | Optional. Default: `Orgpedia/punePMC`. |
 | `IA_ACCESS_KEY` / `IA_SECRET_KEY` | link_wayback, upload_archive, update_archive_metadata, status | archive.org S3 keys. |
 

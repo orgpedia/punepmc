@@ -9,6 +9,7 @@ import shutil
 import signal
 import time
 import urllib.parse
+import zipfile
 from collections import defaultdict
 from pathlib import Path
 
@@ -249,12 +250,17 @@ def doc_year(doc_id):
     return doc_id.split(".")[1][:4]
 
 
-def rel_path(doc_id):
-    return f"{HF_PREFIX}/{doc_year(doc_id)}/{doc_id}.pdf"
+def file_ext(download):
+    """Extension of a fid's file: its downloads.json `format` (pdf, jpg, png, doc, docx); records without one are PDFs."""
+    return (download or {}).get("format") or "pdf"
 
 
-def pdf_path(doc_id):
-    return LFS_DIR / rel_path(doc_id)
+def rel_path(doc_id, ext="pdf"):
+    return f"{HF_PREFIX}/{doc_year(doc_id)}/{doc_id}.{ext}"
+
+
+def doc_path(doc_id, ext="pdf"):
+    return LFS_DIR / rel_path(doc_id, ext)
 
 
 def identifier_for(doc_id):
@@ -291,9 +297,33 @@ def sha1_file(path):
     return h.hexdigest()
 
 
-def looks_like_pdf(path):
+FORMATS = ("pdf", "jpg", "png", "doc", "docx")  # file types PMC posts; anything else is failed:unknown_type
+
+
+def file_format(path):
+    """One of FORMATS, from the file's first bytes (not its name), or None (e.g. an HTML error page)."""
     with path.open("rb") as f:
-        return b"%PDF" in f.read(1024)
+        head = f.read(1024)
+    if b"%PDF" in head:
+        return "pdf"
+    if head.startswith(b"\xff\xd8\xff"):
+        return "jpg"
+    if head.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "png"
+    if head.startswith(b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"):
+        return "doc"
+    if head.startswith(b"PK\x03\x04"):
+        try:
+            with zipfile.ZipFile(path) as z:
+                if any(n.startswith("word/") for n in z.namelist()):
+                    return "docx"
+        except zipfile.BadZipFile:
+            pass
+    return None
+
+
+def looks_like_pdf(path):
+    return file_format(path) == "pdf"
 
 
 def hardlink(src, dst):
@@ -309,11 +339,14 @@ def hardlink(src, dst):
         shutil.copy2(src, dst)
 
 
-def link_pdf(doc_id):
-    """Create/repair input/documents/.../pdfs/<YYYY>/<doc_id>.pdf -> LFS/punePMC/.../<doc_id>.pdf"""
-    link = LINKS_DIR / doc_year(doc_id) / f"{doc_id}.pdf"
+def link_file(doc_id, ext="pdf"):
+    """Create/repair input/documents/.../pdfs/<YYYY>/<doc_id>.<ext> -> LFS/punePMC/.../<doc_id>.<ext>"""
+    link = LINKS_DIR / doc_year(doc_id) / f"{doc_id}.{ext}"
     link.parent.mkdir(parents=True, exist_ok=True)
-    target = os.path.relpath(pdf_path(doc_id), link.parent)
+    for old in link.parent.glob(f"{doc_id}.*"):  # the file changed type (e.g. a JPEG replaced by a PDF)
+        if old != link and old.is_symlink():
+            old.unlink()
+    target = os.path.relpath(doc_path(doc_id, ext), link.parent)
     if link.is_symlink() and os.readlink(link) == target:
         return
     if link.is_symlink() or link.exists():
@@ -330,7 +363,11 @@ def total_size(r):
 
 
 def fetch_file(url, dest, retries=5):
-    """Download url to dest via dest.part, resuming on retries. Returns (info, error)."""
+    """Download url via dest.part, resuming on retries. Returns (info, error).
+
+    The file is saved as dest with the extension of its actual type (info["format"], info["path"]);
+    error is "404", "unknown_type" (not one of FORMATS) or the last exception.
+    """
     dest.parent.mkdir(parents=True, exist_ok=True)
     part = dest.with_name(dest.name + ".part")
     error = ""
@@ -356,11 +393,13 @@ def fetch_file(url, dest, retries=5):
             size = part.stat().st_size
             if total and size != total:
                 raise OSError(f"size mismatch {size} vs {total}")
-            if not looks_like_pdf(part):
+            fmt = file_format(part)
+            if not fmt:
                 part.unlink()
-                return None, "not_pdf"
-            part.replace(dest)
-            info["size"] = size
+                return None, "unknown_type"
+            final = dest.with_suffix(f".{fmt}")
+            part.replace(final)
+            info.update(size=size, format=fmt, path=final)
             return info, ""
         except (requests.RequestException, OSError) as e:
             error = str(e)
@@ -369,15 +408,15 @@ def fetch_file(url, dest, retries=5):
     return None, error
 
 
-def ensure_pdf(doc_id, download):
-    """Return a local path for doc_id's current PDF, fetching it if LFS doesn't have it (e.g. on CI).
+def ensure_file(doc_id, download):
+    """Return a local path for doc_id's current file, fetching it if LFS doesn't have it (e.g. on CI).
 
     Order: any local copy of the same fid (hardlink) -> HF dataset -> PMC.
     """
-    dest = pdf_path(doc_id)
+    dest = doc_path(doc_id, file_ext(download))
     if dest.exists():
         return dest
-    paths = download.get("paths") or [rel_path(doc_id)]
+    paths = download.get("paths") or [rel_path(doc_id, file_ext(download))]
     for p in paths:
         if (LFS_DIR / p).exists():
             hardlink(LFS_DIR / p, dest)
@@ -397,8 +436,8 @@ def ensure_pdf(doc_id, download):
             return dest
 
     info, error = fetch_file(download["url"], dest)
-    if info and sha1_file(dest) == download.get("sha1"):
+    if info and info["path"] == dest and sha1_file(dest) == download.get("sha1"):
         return dest
-    if dest.exists():
-        dest.unlink()
-    raise RuntimeError(f"cannot get PDF for {doc_id} (not on HF, PMC: {error or 'sha1 differs'})")
+    if info and info["path"].exists():
+        info["path"].unlink()
+    raise RuntimeError(f"cannot get the file for {doc_id} (not on HF, PMC: {error or 'sha1 differs'})")
