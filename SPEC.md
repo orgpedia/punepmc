@@ -414,10 +414,10 @@ Metadata (built in one function):
 | `title_mr` | `title_mr` |
 | `title_en_site` | `title_en` as on the site, only when it is real English |
 | `date` | circular date (after overrides), ISO `YYYY-MM-DD` |
-| `creator` | `<department en> (<department mr>), Pune Municipal Corporation` |
+| `creator` | `Pune Municipal Corporation` (the department is in `subject` and the description) |
 | `publisher` | `Pune Municipal Corporation` |
 | `language` | `mar` |
-| `subject` | `Pune Municipal Corporation; PMC; Pune; circular; <department>; <year>` |
+| `subject` | `Pune Municipal Corporation; Circular; <department en>` |
 | `source` | `file_url` |
 | `source_page` | `https://www.pmc.gov.in/en/l/circular` |
 | `pmc_nid`, `pmc_fid`, `sha1` | ids and checksum |
