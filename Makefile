@@ -27,10 +27,19 @@ IA_CHECK ?= 1
 # Already downloaded PDFs moved in by `make onetime_seed`
 SEED_DIR ?= ../pmccirc/import/documents
 
+# .env (local runs) supplies HF_TOKEN etc.; on GitHub Actions they come from secrets
+ifneq (,$(wildcard .env))
+include .env
+endif
+HF_REPO := $(or $(HF_REPO_ID),Orgpedia/punePMC)
+HF_DIR := publications/circulars/pdfs
+ENV_FILE := $(if $(wildcard .env),--env-file .env)
+
 LIMIT_ARG := $(if $(LIMIT),--limit $(LIMIT))
 RETRY_ARG := $(if $(filter 1,$(RETRY_FAILED)),--retry-failed)
 SCOPE_ARG = --scope $(SCOPE) --window $(NEW_WINDOW)
 RUN = mkdir -p $(LOGS); set -o pipefail; $(PY) $(SRC)/$(1) 2>&1 | tee $(LOGS)/$@.log
+HF = mkdir -p $(LOGS); set -o pipefail; uv run $(ENV_FILE) hf $(1) 2>&1 | tee $(LOGS)/$@.log
 
 .PHONY: help install fetch fetch_full check_codes onetime_seed download link_wayback upload_archive \
         update_archive_metadata sync_hf_push hf_card import status \
@@ -57,9 +66,9 @@ help:
 	@echo "  link_wayback             Wayback SPN2 captures                        [SCOPE=$(SCOPE) LIMIT=$(LIMIT) WAYBACK_REUSE=$(WAYBACK_REUSE)]"
 	@echo "  upload_archive           upload to archive.org                        [SCOPE=$(SCOPE) LIMIT=$(LIMIT) IA_COLLECTION=$(IA_COLLECTION)]"
 	@echo "  update_archive_metadata  re-apply changed metadata to archive.org items"
-	@echo "  sync_hf_push             push LFS/punePMC PDFs to the HF dataset      [SCOPE=$(SCOPE)]"
-	@echo "  hf_card                  write and push the HF dataset README"
-	@echo "  import                   pull PDFs from the HF dataset into LFS/punePMC"
+	@echo "  sync_hf_push             hf upload: LFS/punePMC/$(HF_DIR) -> $(HF_REPO) (unchanged files skipped)"
+	@echo "  hf_card                  hf upload: input/hf/README.md -> $(HF_REPO)"
+	@echo "  import                   hf download: $(HF_REPO) -> LFS/punePMC, then relink"
 	@echo "  status                   counts + site vs archive.org check           [IA_CHECK=$(IA_CHECK)]"
 	@echo ""
 	@echo "Credentials come from .env (see env.example) or the environment (GitHub Actions secrets)."
@@ -93,14 +102,19 @@ upload_archive:
 update_archive_metadata:
 	$(call RUN,upload_archive.py --update-metadata --collection $(IA_COLLECTION))
 
+# Pushes whatever is in LFS (on CI: only this run's new files); unchanged files are skipped, nothing is deleted on HF.
+# Large folders are split into several commits; re-run to resume an interrupted push.
 sync_hf_push:
-	$(call RUN,sync_hf.py push $(SCOPE_ARG))
+	@if [ -d LFS/punePMC/$(HF_DIR) ]; then \
+	  $(call HF,upload $(HF_REPO) LFS/punePMC/$(HF_DIR) $(HF_DIR) --repo-type dataset --exclude "*.part" --exclude ".DS_Store" --commit-message "circulars: sync files"); \
+	else echo "*** no files in LFS/punePMC/$(HF_DIR), nothing to push"; fi
 
 hf_card:
-	$(call RUN,sync_hf.py card)
+	$(call HF,upload $(HF_REPO) input/hf/README.md README.md --repo-type dataset --commit-message "dataset card")
 
 import:
-	$(call RUN,sync_hf.py pull)
+	$(call HF,download $(HF_REPO) --repo-type dataset --local-dir LFS/punePMC --include "$(HF_DIR)/**")
+	$(MAKE) --no-print-directory download
 
 status:
 	$(call RUN,status.py $(if $(filter 0,$(IA_CHECK)),--no-ia))
@@ -133,7 +147,7 @@ daily: require_setup
 	$(MAKE) --no-print-directory download SCOPE=new || rc=1; \
 	$(MAKE) --no-print-directory link_wayback SCOPE=new || rc=1; \
 	$(MAKE) --no-print-directory upload_archive SCOPE=new || rc=1; \
-	$(MAKE) --no-print-directory sync_hf_push SCOPE=new || rc=1; \
+	$(MAKE) --no-print-directory sync_hf_push || rc=1; \
 	$(MAKE) --no-print-directory status IA_CHECK=0 || rc=1; \
 	exit $$rc
 
@@ -161,6 +175,6 @@ backfill_crawl: require_setup
 	$(MAKE) --no-print-directory download SCOPE=all || rc=1; \
 	$(MAKE) --no-print-directory upload_archive SCOPE=all || rc=1; \
 	$(MAKE) --no-print-directory update_archive_metadata || rc=1; \
-	$(MAKE) --no-print-directory sync_hf_push SCOPE=all || rc=1; \
+	$(MAKE) --no-print-directory sync_hf_push || rc=1; \
 	$(MAKE) --no-print-directory status || rc=1; \
 	exit $$rc

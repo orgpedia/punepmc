@@ -254,7 +254,6 @@ punepmc/
 │   │   ├── download.py
 │   │   ├── link_wayback.py   # --scope new|all --limit N
 │   │   ├── upload_archive.py # --scope new|all --limit N | --update-metadata
-│   │   ├── sync_hf.py        # pull | push | card
 │   │   └── status.py
 │   ├── documents/publications/circulars/      # tracked in git
 │   │   ├── departments.json  # curated: tid → code (the table in §2)
@@ -337,7 +336,7 @@ Make variables:
 | Variable | Default | Used by |
 |---|---|---|
 | `LIMIT` | empty (no cap) | `link_wayback`, `upload_archive`, `backfill`: maximum items this run |
-| `SCOPE` | `all` | `download`, `link_wayback`, `upload_archive`, `sync_hf_push`: `new` = circulars first seen within `NEW_WINDOW` |
+| `SCOPE` | `all` | `download`, `link_wayback`, `upload_archive`: `new` = circulars first seen within `NEW_WINDOW` |
 | `NEW_WINDOW` | `7d` | what `SCOPE=new` means; lets the daily run retry its own recent failures without touching the backlog |
 | `DOWNLOAD_DELAY` | `1` (s) | `download`, `fetch` |
 | `RETRY_FAILED` | `0` | `download`: also retry `failed:404` |
@@ -430,18 +429,20 @@ Metadata (built in one function):
 Rebuilds the metadata for every uploaded doc_id and calls `modify_metadata` only where `metadata_sha1` differs (after title, date or department edits,
 a new Wayback link, a collection move, or later the translated title). It never uploads the PDFs again.
 
+The three Hugging Face targets use the `hf` CLI (from `huggingface_hub`) directly, no Python script. The token comes from `HF_TOKEN`
+(`uv run --env-file .env` locally, secrets on CI); the repo is `HF_REPO_ID` or `Orgpedia/punePMC`.
+
 ### `sync_hf_push`
-`create_repo("Orgpedia/punePMC", repo_type="dataset", exist_ok=True)`, then `upload_folder(folder_path="LFS/punePMC",
-allow_patterns=["publications/circulars/pdfs/**"], commit_message="circulars: <mode> <date>")`.
-With `SCOPE=new` (daily), `allow_patterns` lists just the PDFs of circulars first seen within `NEW_WINDOW`.
-Only files present in `LFS/` are sent, unchanged ones are skipped, and nothing is ever deleted on HF. So a CI run with a partial `LFS/` is safe.
-With more than 1,000 local PDFs (the first push) it uses `upload_large_folder` instead, which is resumable and splits the upload into several commits.
+`hf upload Orgpedia/punePMC LFS/punePMC/publications/circulars/pdfs publications/circulars/pdfs --repo-type dataset --exclude "*.part"`.
+It creates the (public) dataset if missing. Only files present in `LFS/` are sent, unchanged ones are skipped, and nothing is ever deleted on HF,
+so a CI run (which holds only that run's new files) is safe. Large folders (the first push) are split into several commits; re-running resumes.
 
 ### `hf_card`
-Writes and pushes `README.md` (§8) if it is missing or has changed.
+`hf upload Orgpedia/punePMC input/hf/README.md README.md --repo-type dataset`. The card is a plain file in the repo (§8).
 
 ### `import`
-`snapshot_download(…, allow_patterns=["publications/circulars/pdfs/**"])` into `LFS/punePMC`, then repairs the symlinks. Use it locally after a fresh clone.
+`hf download Orgpedia/punePMC --repo-type dataset --local-dir LFS/punePMC --include "publications/circulars/pdfs/**"`, then `make download`
+to repair the hardlinks and symlinks. Use it locally after a fresh clone.
 
 ### `status`
 Prints:
@@ -463,7 +464,7 @@ Runs: `install → fetch_full → check_codes → onetime_seed → download → 
 - Afterwards, commit `input/documents/` and push. From then on GitHub Actions takes over.
 
 ### Daily: `make daily` (GitHub Actions cron, or locally)
-Runs: `fetch → download → link_wayback → upload_archive → sync_hf_push` (all `SCOPE=new`) `→ status IA_CHECK=0`.
+Runs: `fetch → download → link_wayback → upload_archive` (all `SCOPE=new`) `→ sync_hf_push → status IA_CHECK=0`.
 
 - Daily is about **new circulars only**. `fetch` asks PMC only for nids above the highest known one, and every later step is limited to
   circulars first seen within `NEW_WINDOW` (7 days), so the job stays small and retries its own recent failures.
@@ -477,7 +478,7 @@ Runs: `fetch → download → link_wayback → upload_archive → sync_hf_push` 
 |---|---|---|
 | `make backfill WHAT=archive LIMIT=500` | `upload_archive SCOPE=all` → `status` | finish archive.org uploads left over from setup |
 | `make backfill WHAT=wayback LIMIT=200` | `link_wayback SCOPE=all` → `update_archive_metadata` → `status` | slowly work through the ~8,900 Wayback captures, and add the new Wayback links to the archive.org items; scheduled daily until done |
-| `make backfill WHAT=crawl` | `fetch_full → download → upload_archive → update_archive_metadata → sync_hf_push` (all `SCOPE=all`) `→ status` | weekly: re-read the whole site, apply PMC's edits to old circulars, fetch missing or replaced PDFs, upload anything not yet on archive.org, catch removals |
+| `make backfill WHAT=crawl` | `fetch_full → download → upload_archive → update_archive_metadata` (all `SCOPE=all`) `→ sync_hf_push → status` | weekly: re-read the whole site, apply PMC's edits to old circulars, fetch missing or replaced PDFs, upload anything not yet on archive.org, catch removals |
 
 ## 7. GitHub Actions
 
