@@ -1,0 +1,20 @@
+[
+  {
+    "time_utc": "2026-10-26 20:58:36 UTC+0000",
+    "nid": 42820,
+    "doc_id": "gad.2026-Oct-19.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-26 20:58:36 UTC+0000",
+    "nid": 42862,
+    "doc_id": "labour.2026-Oct-21.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-26 20:58:36 UTC+0000",
+    "nid": 42866,
+    "doc_id": "labour.2026-Oct-21.02",
+    "event": "new"
+  }
+]

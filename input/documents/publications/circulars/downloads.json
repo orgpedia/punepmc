@@ -175726,5 +175726,62 @@
     "attempts": 1,
     "current": true,
     "format": "pdf"
+  },
+  {
+    "fid": 39600,
+    "nids": [
+      42820
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7362_0.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-19.01.pdf"
+    ],
+    "size": 698401,
+    "sha1": "ff4e69b21a3e0e0fc275263f374efbf3c1e09e37",
+    "last_modified": "Mon, 19 Oct 2026 10:35:22 GMT",
+    "etag": "\"6ad5f26a-aa821\"",
+    "download_time_utc": "2026-10-26 20:58:55 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 39689,
+    "nids": [
+      42862
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/3459.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/labour.2026-Oct-21.01.pdf"
+    ],
+    "size": 745245,
+    "sha1": "425c8d6e37e6891200f59b4af1ecdd43f89944fc",
+    "last_modified": "Wed, 21 Oct 2026 11:14:22 GMT",
+    "etag": "\"6ad89e8e-b5f1d\"",
+    "download_time_utc": "2026-10-26 20:58:57 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 39693,
+    "nids": [
+      42866
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Circular%203468.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/labour.2026-Oct-21.02.pdf"
+    ],
+    "size": 1309304,
+    "sha1": "edbab65bedcc86bb2690ede80722603ccc0b368c",
+    "last_modified": "Wed, 21 Oct 2026 12:07:59 GMT",
+    "etag": "\"6ad8ab1f-13fa78\"",
+    "download_time_utc": "2026-10-26 20:58:59 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
