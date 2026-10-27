@@ -175783,5 +175783,62 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 39976,
+    "nids": [
+      43020
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Office%20circular_0.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/accounts.2026-Oct-27.01.pdf"
+    ],
+    "size": 553667,
+    "sha1": "1604b8f1a67f48020fb0fa2b6cbb1c98e0006d8e",
+    "last_modified": "Tue, 27 Oct 2026 10:39:02 GMT",
+    "etag": "\"6ae07f46-872c3\"",
+    "download_time_utc": "2026-10-27 20:34:31 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 39979,
+    "nids": [
+      43023
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Circular%20-%20Water%20Supply%20Hamipatra.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/building.2026-Oct-27.01.pdf"
+    ],
+    "size": 2471416,
+    "sha1": "1388f1cdac856267dd0e0f4a948b7de4082d92fe",
+    "last_modified": "Tue, 27 Oct 2026 11:16:56 GMT",
+    "etag": "\"6ae08828-25b5f8\"",
+    "download_time_utc": "2026-10-27 20:34:34 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 39982,
+    "nids": [
+      43025
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Karyalayin%20Aadesh.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-27.01.pdf"
+    ],
+    "size": 116653,
+    "sha1": "c40c827747f92bb86e219ecdba0bccadb5333168",
+    "last_modified": "Tue, 27 Oct 2026 12:41:53 GMT",
+    "etag": "\"6ae09c11-1c7ad\"",
+    "download_time_utc": "2026-10-27 20:34:35 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]

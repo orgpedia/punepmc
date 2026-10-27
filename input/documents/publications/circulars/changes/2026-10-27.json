@@ -1,0 +1,20 @@
+[
+  {
+    "time_utc": "2026-10-27 20:34:15 UTC+0000",
+    "nid": 43020,
+    "doc_id": "accounts.2026-Oct-27.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-27 20:34:15 UTC+0000",
+    "nid": 43023,
+    "doc_id": "building.2026-Oct-27.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-27 20:34:15 UTC+0000",
+    "nid": 43025,
+    "doc_id": "gad.2026-Oct-27.01",
+    "event": "new"
+  }
+]
