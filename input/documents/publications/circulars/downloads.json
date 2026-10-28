@@ -175840,5 +175840,43 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 39985,
+    "nids": [
+      43030
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Regarding%20additional%20local%20holidays%20to%20be%20granted%20to%20Pune%20Municipal%20Corporation%20offices%20in%20the%20year%202026..pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-28.01.pdf"
+    ],
+    "size": 409254,
+    "sha1": "0f61ad7ba295778b4c1ab16e613ff6d29e8fcaf9",
+    "last_modified": "Wed, 28 Oct 2026 05:19:00 GMT",
+    "etag": "\"6ae185c4-63ea6\"",
+    "download_time_utc": "2026-10-28 20:56:53 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40069,
+    "nids": [
+      43097
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7764%2028102026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-28.02.pdf"
+    ],
+    "size": 696976,
+    "sha1": "80163bfad7bbbbc5225d53a13a86b62133f6736a",
+    "last_modified": "Wed, 28 Oct 2026 13:01:09 GMT",
+    "etag": "\"6ae1f215-aa290\"",
+    "download_time_utc": "2026-10-28 20:56:54 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
