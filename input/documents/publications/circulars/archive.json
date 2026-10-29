@@ -48,6 +48,18 @@
     "message": ""
   },
   {
+    "doc_id": "accounts.2026-Oct-27.01",
+    "fid": 39976,
+    "identifier": "in.gov.pmc.circular.accounts.2026-Oct-27.01",
+    "collection": "opensource",
+    "sha1": "1604b8f1a67f48020fb0fa2b6cbb1c98e0006d8e",
+    "time_utc": "2026-10-29 10:17:39 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.accounts.2026-Oct-27.01",
+    "metadata_sha1": "0c3838ed0ad114a1235fa75f2435cf78177eb47e",
+    "message": ""
+  },
+  {
     "doc_id": "amc-estate.2024-Dec-24.01",
     "fid": 1576,
     "identifier": "in.gov.pmc.circular.amc-estate.2024-Dec-24.01",
@@ -81,6 +93,18 @@
     "upload_success": true,
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.bhavan.2024-Dec-06.01",
     "metadata_sha1": "2fde12e33b91429623955b48b174f5d9eb459d8e",
+    "message": ""
+  },
+  {
+    "doc_id": "building.2026-Oct-27.01",
+    "fid": 39979,
+    "identifier": "in.gov.pmc.circular.building.2026-Oct-27.01",
+    "collection": "opensource",
+    "sha1": "1388f1cdac856267dd0e0f4a948b7de4082d92fe",
+    "time_utc": "2026-10-29 10:18:01 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.building.2026-Oct-27.01",
+    "metadata_sha1": "c8d54090fd9f7fa03243b02e6a49844d3e3d00e5",
     "message": ""
   },
   {
@@ -504,6 +528,66 @@
     "message": ""
   },
   {
+    "doc_id": "gad.2026-Oct-19.01",
+    "fid": 39600,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-19.01",
+    "collection": "opensource",
+    "sha1": "ff4e69b21a3e0e0fc275263f374efbf3c1e09e37",
+    "time_utc": "2026-10-29 10:16:29 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-19.01",
+    "metadata_sha1": "a733419a0954ed5b4a7f769be84fc07c848e784c",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Oct-27.01",
+    "fid": 39982,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-27.01",
+    "collection": "opensource",
+    "sha1": "c40c827747f92bb86e219ecdba0bccadb5333168",
+    "time_utc": "2026-10-29 10:18:22 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-27.01",
+    "metadata_sha1": "f54bf5e2e723ebe7c9f635c81bc4507eb28184b5",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Oct-28.01",
+    "fid": 39985,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-28.01",
+    "collection": "opensource",
+    "sha1": "0f61ad7ba295778b4c1ab16e613ff6d29e8fcaf9",
+    "time_utc": "2026-10-29 10:18:54 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-28.01",
+    "metadata_sha1": "72a69aafb51b8b1c4bff484e79590b70e80f1632",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Oct-28.02",
+    "fid": 40069,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-28.02",
+    "collection": "opensource",
+    "sha1": "80163bfad7bbbbc5225d53a13a86b62133f6736a",
+    "time_utc": "2026-10-29 10:19:11 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-28.02",
+    "metadata_sha1": "f58150a38e30fa46b1879ac47ca4b93258ffc2b0",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Oct-29.01",
+    "fid": 40101,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-29.01",
+    "collection": "opensource",
+    "sha1": "6940ddb8ba029a5d151e1bb29420434f7cdd2abc",
+    "time_utc": "2026-10-29 10:19:28 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-29.01",
+    "metadata_sha1": "f546f37dd48c1fba956df38352caf48c62e4bf39",
+    "message": ""
+  },
+  {
     "doc_id": "it.2024-Dec-17.01",
     "fid": 1592,
     "identifier": "in.gov.pmc.circular.it.2024-Dec-17.01",
@@ -621,6 +705,30 @@
     "upload_success": true,
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2024-Dec-27.04",
     "metadata_sha1": "f8e1eb1b73ff4ba24e9fcf430757a8287d802641",
+    "message": ""
+  },
+  {
+    "doc_id": "labour.2026-Oct-21.01",
+    "fid": 39689,
+    "identifier": "in.gov.pmc.circular.labour.2026-Oct-21.01",
+    "collection": "opensource",
+    "sha1": "425c8d6e37e6891200f59b4af1ecdd43f89944fc",
+    "time_utc": "2026-10-29 10:17:03 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2026-Oct-21.01",
+    "metadata_sha1": "65d3271f533a4f0e6c0800dccd6892f3a270b639",
+    "message": ""
+  },
+  {
+    "doc_id": "labour.2026-Oct-21.02",
+    "fid": 39693,
+    "identifier": "in.gov.pmc.circular.labour.2026-Oct-21.02",
+    "collection": "opensource",
+    "sha1": "edbab65bedcc86bb2690ede80722603ccc0b368c",
+    "time_utc": "2026-10-29 10:17:21 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2026-Oct-21.02",
+    "metadata_sha1": "9391ecbd8630b6e714724974b06c26e6fdf3e182",
     "message": ""
   },
   {

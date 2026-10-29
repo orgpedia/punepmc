@@ -1,0 +1,26 @@
+[
+  {
+    "fid": 39600,
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7362_0.pdf",
+    "job_id": "",
+    "time_utc": "2026-10-29 10:14:27 UTC+0000",
+    "link_success": false,
+    "message": "service_failure: HTTP 429: Your request is being blocked because our system has flagged it as suspected abusive bot traffic that is degrading the performance of the Wayback Machine.\n<p>\nWe recognize this might be a false positi"
+  },
+  {
+    "fid": 39689,
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/3459.pdf",
+    "job_id": "",
+    "time_utc": "2026-10-29 10:15:28 UTC+0000",
+    "link_success": false,
+    "message": "service_failure: HTTP 429: Your request is being blocked because our system has flagged it as suspected abusive bot traffic that is degrading the performance of the Wayback Machine.\n<p>\nWe recognize this might be a false positi"
+  },
+  {
+    "fid": 39693,
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Circular%203468.pdf",
+    "job_id": "",
+    "time_utc": "2026-10-29 10:16:29 UTC+0000",
+    "link_success": false,
+    "message": "service_failure: HTTP 429: Your request is being blocked because our system has flagged it as suspected abusive bot traffic that is degrading the performance of the Wayback Machine.\n<p>\nWe recognize this might be a false positi"
+  }
+]

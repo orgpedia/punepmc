@@ -175878,5 +175878,24 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40101,
+    "nids": [
+      43116
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/clerk%20waiting-compressed.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-29.01.pdf"
+    ],
+    "size": 1061714,
+    "sha1": "6940ddb8ba029a5d151e1bb29420434f7cdd2abc",
+    "last_modified": "Thu, 29 Oct 2026 09:42:52 GMT",
+    "etag": "\"6ae3151c-103352\"",
+    "download_time_utc": "2026-10-29 10:14:24 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]

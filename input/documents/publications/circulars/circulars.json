@@ -212497,5 +212497,27 @@
     "first_seen_utc": "2026-10-28 20:55:36 UTC+0000",
     "last_seen_utc": "2026-10-28 20:55:36 UTC+0000",
     "removed_utc": null
+  },
+  {
+    "nid": 43116,
+    "doc_id": "gad.2026-Oct-29.01",
+    "uuid": "cf5bb02b-9fb2-4495-93e3-2a6853edc419",
+    "title_en": "Regarding the publication of a draft waiting list for the post of \"Clerk-Typist (Class-3)\" for employees appointed on compassionate grounds in the Pune Municipal Corporation.",
+    "title_mr": "पुणे महानगरपालिकेमधील अनुकंपा तत्वावर नियुक्ती दिलेल्या सेवकांची \"लिपिक टंकलेखक (वर्ग-३)” पदासाठी प्रारूप प्रतिक्षा यादी प्रसिद्ध करणेबाबत.",
+    "title_en_is_english": true,
+    "circular_date": "2026-10-29",
+    "tid": 18,
+    "department": "General Administration",
+    "created": "2026-10-29T09:42:57+00:00",
+    "changed": "2026-10-29T09:42:57+00:00",
+    "fid": 40101,
+    "file_url": "https://webadmin.pmc.gov.in/sites/default/files/circular/clerk%20waiting-compressed.pdf",
+    "filename": "clerk waiting-compressed.pdf",
+    "filesize": 1061714,
+    "same_file_as": [],
+    "status": "ok",
+    "first_seen_utc": "2026-10-29 10:13:50 UTC+0000",
+    "last_seen_utc": "2026-10-29 10:13:50 UTC+0000",
+    "removed_utc": null
   }
 ]
