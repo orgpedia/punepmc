@@ -2,14 +2,14 @@ name: backfill
 
 on:
   schedule:
-    - cron: "0 2 * * *"   # wayback backlog, LIMIT=200 (07:30 IST)
     - cron: "0 4 * * 0"   # weekly full re-crawl, Sunday (09:30 IST)
+  # No wayback here: SPN2 rejects GitHub's IPs (HTTP 429), so run `make backfill WHAT=wayback` locally.
   workflow_dispatch:
     inputs:
       what:
         description: "What to backfill"
         type: choice
-        options: [archive, wayback, crawl]
+        options: [archive, crawl]
         default: archive
       limit:
         description: "Max items this run (empty = no limit; keep runs under ~5h)"
@@ -46,14 +46,11 @@ jobs:
       - name: Backfill
         run: |
           if [ "$EVENT" = "schedule" ]; then
-            case "$SCHEDULE" in
-              "0 2 * * *") WHAT=wayback; LIMIT=200 ;;
-              *)           WHAT=crawl;   LIMIT= ;;
-            esac
+            WHAT=crawl; LIMIT=
           else
             WHAT="$INPUT_WHAT"; LIMIT="$INPUT_LIMIT"
           fi
-          case "$WHAT" in archive|wayback|crawl) ;; *) echo "bad what: $WHAT"; exit 1 ;; esac
+          case "$WHAT" in archive|crawl) ;; *) echo "bad what: $WHAT"; exit 1 ;; esac
           case "$LIMIT" in ""|*[!0-9]*) LIMIT= ;; esac
           echo "WHAT=$WHAT" >> "$GITHUB_ENV"
           make backfill WHAT="$WHAT" LIMIT="$LIMIT"

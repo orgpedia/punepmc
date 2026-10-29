@@ -28,7 +28,8 @@ jobs:
 
       - run: make install
 
-      - run: make daily
+      # Wayback SPN2 rejects GitHub's IPs (HTTP 429), so captures run locally: make backfill WHAT=wayback
+      - run: make daily WAYBACK=0
 
       - name: Commit state
         if: always()

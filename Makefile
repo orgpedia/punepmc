@@ -24,6 +24,8 @@ SETUP_ARCHIVE_LIMIT ?= 55
 IA_COLLECTION ?= opensource
 # 0 = status skips the site vs archive.org search
 IA_CHECK ?= 1
+# 0 = daily skips Wayback (GitHub Actions: SPN2 blocks GitHub's IPs with HTTP 429, so Wayback runs locally)
+WAYBACK ?= 1
 # Already downloaded PDFs moved in by `make onetime_seed`
 SEED_DIR ?= ../pmccirc/import/documents
 
@@ -52,6 +54,7 @@ help:
 	@echo "  setup                    first time, locally: fetch_full onetime_seed download sync_hf_push hf_card upload_archive (no wayback)"
 	@echo "                           uploads only the first SETUP_ARCHIVE_LIMIT=$(SETUP_ARCHIVE_LIMIT) circulars to archive.org"
 	@echo "  daily                    new circulars only: fetch download link_wayback upload_archive sync_hf_push (SCOPE=new)"
+	@echo "                           WAYBACK=0 skips link_wayback (used on GitHub Actions)"
 	@echo "  backfill WHAT=archive    upload the archive.org backlog              [LIMIT=$(LIMIT)]"
 	@echo "  backfill WHAT=wayback    capture the Wayback backlog                 [LIMIT=$(LIMIT)]"
 	@echo "  backfill WHAT=crawl      re-crawl the whole site, fetch missing/changed PDFs, upload new ones"
@@ -155,7 +158,7 @@ daily: require_setup
 	@rc=0; \
 	$(MAKE) --no-print-directory fetch || rc=1; \
 	$(MAKE) --no-print-directory download SCOPE=new || rc=1; \
-	$(MAKE) --no-print-directory link_wayback SCOPE=new || rc=1; \
+	if [ "$(WAYBACK)" = 1 ]; then $(MAKE) --no-print-directory link_wayback SCOPE=new || rc=1; fi; \
 	$(MAKE) --no-print-directory upload_archive SCOPE=new || rc=1; \
 	$(MAKE) --no-print-directory sync_hf_push || rc=1; \
 	$(MAKE) --no-print-directory status IA_CHECK=0 || rc=1; \

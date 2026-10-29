@@ -10,8 +10,8 @@ Everything runs from one Makefile, either locally or from GitHub Actions, in thr
 | Mode | Target | Where | What |
 |---|---|---|---|
 | **Setup** | `make setup` | locally, once | full crawl → move PDFs from pmccirc → download the rest → HF → archive.org. **No Wayback.** |
-| **Daily** | `make daily` | GitHub Actions cron (or locally) | **new circulars only** (never re-reads or updates old ones) → download → Wayback → archive.org → HF |
-| **Backfill** | `make backfill WHAT=archive`, `WHAT=wayback`, `WHAT=crawl` | GitHub Actions (manual or cron), or locally | work through the backlog in `LIMIT`-sized chunks, or re-crawl the whole site |
+| **Daily** | `make daily` | GitHub Actions cron (or locally) | **new circulars only** (never re-reads or updates old ones) → download → Wayback (local runs only) → archive.org → HF |
+| **Backfill** | `make backfill WHAT=archive`, `WHAT=wayback`, `WHAT=crawl` | GitHub Actions (manual or cron) or locally; `wayback` locally only | work through the backlog in `LIMIT`-sized chunks, or re-crawl the whole site |
 
 Processing (OCR, translation, extraction) is a later stage and is out of scope here.
 
@@ -245,7 +245,7 @@ punepmc/
 ├── .gitignore                # .env, .venv/, LFS/, input/logs/*.log, *.part
 ├── .github/workflows/
 │   ├── daily.yml             # cron → make daily
-│   └── backfill.yml          # manual (+ cron for wayback) → make backfill WHAT=<what>
+│   └── backfill.yml          # manual (+ weekly cron for crawl) → make backfill WHAT=<what>
 ├── input/
 │   ├── src/
 │   │   ├── common.py         # paths, constants, http session, JSON:API paging, json/symlink helpers, doc_id rules, file types, ensure_file()
@@ -471,13 +471,16 @@ Runs: `fetch → download → link_wayback → upload_archive` (all `SCOPE=new`)
 - It never re-reads old circulars or updates old data: no `update_archive_metadata`, no retries of old failed downloads, no archive.org
   search in `status`. All of that is backfill's job.
 - It exits non-zero if any step failed, so GitHub Actions marks the run red.
+- **On GitHub Actions it runs as `make daily WAYBACK=0`, without `link_wayback`.** Wayback's SPN2 answers requests from GitHub's IP ranges
+  with `HTTP 429 … flagged as suspected abusive bot traffic` (seen 2026-10-29), even with valid keys. New circulars therefore get their
+  Wayback capture from a local `make backfill WHAT=wayback` (or a local `make daily`, where `WAYBACK=1` is the default).
 
 ### Backfill (GitHub Actions manual or cron, or locally)
 
 | Target | Runs | Typical use |
 |---|---|---|
 | `make backfill WHAT=archive LIMIT=500` | `upload_archive SCOPE=all` → `status` | finish archive.org uploads left over from setup |
-| `make backfill WHAT=wayback LIMIT=200` | `link_wayback SCOPE=all` → `update_archive_metadata` → `status` | slowly work through the ~8,900 Wayback captures, and add the new Wayback links to the archive.org items; scheduled daily until done |
+| `make backfill WHAT=wayback LIMIT=200` | `link_wayback SCOPE=all` → `update_archive_metadata` → `status` | slowly work through the ~8,900 Wayback captures, and add the new Wayback links to the archive.org items. **Local only**: run it every few days from your machine |
 | `make backfill WHAT=crawl` | `fetch_full → download → upload_archive → update_archive_metadata` (all `SCOPE=all`) `→ sync_hf_push → status` | weekly: re-read the whole site, apply PMC's edits to old circulars, fetch missing or replaced PDFs, upload anything not yet on archive.org, catch removals |
 
 ## 7. GitHub Actions
@@ -492,13 +495,13 @@ a conflict or untracked files in the way stop the run before any state file is t
 
 **`.github/workflows/daily.yml`**
 - `on: schedule: cron "0 16 * * *"` (21:30 IST) and `workflow_dispatch`.
-- Steps: checkout → `astral-sh/setup-uv` → `make install` → `make daily` → commit `input/documents/` if it changed
+- Steps: checkout → `astral-sh/setup-uv` → `make install` → `make daily WAYBACK=0` → commit `input/documents/` if it changed
   (`git pull --rebase && git push`, as `github-actions[bot]`) → upload `input/logs/*.log` as a run artifact.
 - The commit step runs even when `make daily` fails (`if: always()`), so partial progress is saved.
 
 **`.github/workflows/backfill.yml`**
-- `on: workflow_dispatch` with inputs `what` (`archive` | `wayback` | `crawl`) and `limit`, plus
-  `schedule` crons for `wayback` (daily, `LIMIT=200`) and `crawl` (weekly, Sunday).
+- `on: workflow_dispatch` with inputs `what` (`archive` | `crawl`) and `limit`, plus a `schedule` cron for `crawl` (weekly, Sunday).
+  There is no `wayback` option: it runs locally (see Daily).
 - The steps are the same as daily, with `make backfill WHAT=$(what) LIMIT=$(limit)`.
 - `timeout-minutes: 330`, under GitHub's 6-hour job limit. `LIMIT` keeps each run well inside it.
 
