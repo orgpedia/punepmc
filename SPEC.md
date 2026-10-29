@@ -440,7 +440,7 @@ so a CI run (which holds only that run's new files) is safe. Large folders (the 
 ### `hf_card`
 `hf upload Orgpedia/punePMC input/hf/README.md README.md --repo-type dataset`. The card is a plain file in the repo (§8).
 
-### `import`
+### `sync_hf_pull`
 `hf download Orgpedia/punePMC --repo-type dataset --local-dir LFS/punePMC --include "publications/circulars/pdfs/**"`, then `make download`
 to repair the hardlinks and symlinks. Use it locally after a fresh clone.
 
@@ -517,7 +517,7 @@ Shared:
 
 | Variable | Used by | Notes |
 |---|---|---|
-| `HF_TOKEN` | sync_hf_push, hf_card, import, ensure_file | Needs write access to `Orgpedia/punePMC`. |
+| `HF_TOKEN` | sync_hf_push, sync_hf_pull, hf_card, ensure_file | Needs write access to `Orgpedia/punePMC`. |
 | `HF_REPO_ID` | same | Optional. Default: `Orgpedia/punePMC`. |
 | `IA_ACCESS_KEY` / `IA_SECRET_KEY` | link_wayback, upload_archive, update_archive_metadata, status | archive.org S3 keys. |
 

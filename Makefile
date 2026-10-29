@@ -42,7 +42,7 @@ RUN = mkdir -p $(LOGS); set -o pipefail; $(PY) $(SRC)/$(1) 2>&1 | tee $(LOGS)/$@
 HF = mkdir -p $(LOGS); set -o pipefail; uv run $(ENV_FILE) hf $(1) 2>&1 | tee $(LOGS)/$@.log
 
 .PHONY: help install fetch fetch_full check_codes onetime_seed download link_wayback upload_archive \
-        update_archive_metadata sync_hf_push hf_card import status \
+        update_archive_metadata sync_hf_push sync_hf_pull hf_card status \
         setup daily backfill backfill_archive backfill_wayback backfill_crawl require_setup
 
 help:
@@ -68,7 +68,7 @@ help:
 	@echo "  update_archive_metadata  re-apply changed metadata to archive.org items"
 	@echo "  sync_hf_push             hf upload: LFS/punePMC/$(HF_DIR) -> $(HF_REPO) (unchanged files skipped)"
 	@echo "  hf_card                  hf upload: input/hf/README.md -> $(HF_REPO)"
-	@echo "  import                   hf download: $(HF_REPO) -> LFS/punePMC, then relink"
+	@echo "  sync_hf_pull             hf download: $(HF_REPO) -> LFS/punePMC, then relink (e.g. after a fresh clone)"
 	@echo "  status                   counts + site vs archive.org check           [IA_CHECK=$(IA_CHECK)]"
 	@echo ""
 	@echo "Credentials come from .env (see env.example) or the environment (GitHub Actions secrets)."
@@ -112,7 +112,7 @@ sync_hf_push:
 hf_card:
 	$(call HF,upload $(HF_REPO) input/hf/README.md README.md --repo-type dataset --commit-message "dataset card")
 
-import:
+sync_hf_pull:
 	$(call HF,download $(HF_REPO) --repo-type dataset --local-dir LFS/punePMC --include "$(HF_DIR)/**")
 	$(MAKE) --no-print-directory download
 
