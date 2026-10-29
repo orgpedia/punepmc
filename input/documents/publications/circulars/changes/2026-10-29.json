@@ -4,5 +4,23 @@
     "nid": 43116,
     "doc_id": "gad.2026-Oct-29.01",
     "event": "new"
+  },
+  {
+    "time_utc": "2026-10-29 20:59:43 UTC+0000",
+    "nid": 43139,
+    "doc_id": "vigilance.2026-Oct-29.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-29 20:59:43 UTC+0000",
+    "nid": 43169,
+    "doc_id": "gad.2026-Oct-29.02",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-29 20:59:43 UTC+0000",
+    "nid": 43171,
+    "doc_id": "gad.2026-Oct-29.03",
+    "event": "new"
   }
 ]

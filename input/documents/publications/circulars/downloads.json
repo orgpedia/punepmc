@@ -175897,5 +175897,62 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40128,
+    "nids": [
+      43139
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Drain%20cleaning%20Deepening%20and%20Widening.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/vigilance.2026-Oct-29.01.pdf"
+    ],
+    "size": 168159,
+    "sha1": "4ba87cb61b381fe821b7eb51cdd407e908e83f53",
+    "last_modified": "Thu, 29 Oct 2026 11:33:57 GMT",
+    "etag": "\"6ae32f25-290df\"",
+    "download_time_utc": "2026-10-29 20:59:50 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40143,
+    "nids": [
+      43169
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7840.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-29.02.pdf"
+    ],
+    "size": 426003,
+    "sha1": "6e24b9158ad638c2509be4117d3e661c5d8db1cd",
+    "last_modified": "Thu, 29 Oct 2026 14:02:49 GMT",
+    "etag": "\"6ae35209-68013\"",
+    "download_time_utc": "2026-10-29 20:59:52 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40144,
+    "nids": [
+      43171
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/2026-10/7841_2902026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-29.03.pdf"
+    ],
+    "size": 167984,
+    "sha1": "f4283ae923b9f8921bb7650e10f8c85981113e2f",
+    "last_modified": "Thu, 29 Oct 2026 17:16:57 GMT",
+    "etag": "\"6ae37f89-29030\"",
+    "download_time_utc": "2026-10-29 20:59:54 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
