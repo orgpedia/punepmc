@@ -486,6 +486,10 @@ Both workflows run the same Makefile targets as a local run, so anything can be 
 `daily` and every `backfill` first run `require_setup`, which fails unless `circulars.json` exists. That way a scheduled run can never
 do a first-time setup on CI.
 
+Because GitHub Actions commits to the state files every day, local runs of `daily`, `backfill` and `sync_hf_pull` first run `git_pull`
+(`git pull --ff-only`; skipped when `GITHUB_ACTIONS=true`). It never merges: a diverged copy or untracked files in the way stop the run
+before any state file is touched. Single steps (`fetch`, `download`, `upload_archive`, …) don't pull: run `git pull` yourself first.
+
 **`.github/workflows/daily.yml`**
 - `on: schedule: cron "0 16 * * *"` (21:30 IST) and `workflow_dispatch`.
 - Steps: checkout → `astral-sh/setup-uv` → `make install` → `make daily` → commit `input/documents/` if it changed

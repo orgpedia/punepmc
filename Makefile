@@ -43,7 +43,7 @@ HF = mkdir -p $(LOGS); set -o pipefail; uv run $(ENV_FILE) hf $(1) 2>&1 | tee $(
 
 .PHONY: help install fetch fetch_full check_codes onetime_seed download link_wayback upload_archive \
         update_archive_metadata sync_hf_push sync_hf_pull hf_card status \
-        setup daily backfill backfill_archive backfill_wayback backfill_crawl require_setup
+        setup daily backfill backfill_archive backfill_wayback backfill_crawl require_setup git_pull
 
 help:
 	@echo "Usage: make <target> [VAR=value ...]   (see SPEC.md)"
@@ -68,7 +68,8 @@ help:
 	@echo "  update_archive_metadata  re-apply changed metadata to archive.org items"
 	@echo "  sync_hf_push             hf upload: LFS/punePMC/$(HF_DIR) -> $(HF_REPO) (unchanged files skipped)"
 	@echo "  hf_card                  hf upload: input/hf/README.md -> $(HF_REPO)"
-	@echo "  sync_hf_pull             hf download: $(HF_REPO) -> LFS/punePMC, then relink (e.g. after a fresh clone)"
+	@echo "  sync_hf_pull             git pull, hf download: $(HF_REPO) -> LFS/punePMC, then relink (e.g. after a fresh clone)"
+	@echo "  git_pull                 git pull --ff-only the state files (run first by sync_hf_pull, daily, backfill; skipped on CI)"
 	@echo "  status                   counts + site vs archive.org check           [IA_CHECK=$(IA_CHECK)]"
 	@echo ""
 	@echo "Credentials come from .env (see env.example) or the environment (GitHub Actions secrets)."
@@ -112,7 +113,7 @@ sync_hf_push:
 hf_card:
 	$(call HF,upload $(HF_REPO) input/hf/README.md README.md --repo-type dataset --commit-message "dataset card")
 
-sync_hf_pull:
+sync_hf_pull: git_pull
 	$(call HF,download $(HF_REPO) --repo-type dataset --local-dir LFS/punePMC --include "$(HF_DIR)/**")
 	$(MAKE) --no-print-directory download
 
@@ -135,8 +136,17 @@ setup: install
 	$(MAKE) --no-print-directory status || rc=1; \
 	exit $$rc
 
+# GitHub Actions commits to the state files daily, so local runs start from the latest copy. --ff-only never merges:
+# if the local copy has diverged (or untracked files are in the way) it stops, and you resolve it with `git pull --rebase`.
+git_pull:
+ifeq ($(GITHUB_ACTIONS),true)
+	@true
+else
+	git pull --ff-only
+endif
+
 # daily/backfill run on GitHub Actions; never let them do a first-time setup there
-require_setup:
+require_setup: git_pull
 	@test -s $(STATE)/circulars.json || { echo ">>> $(STATE)/circulars.json is missing: run 'make setup' locally first"; exit 1; }
 
 # daily touches only circulars first seen within NEW_WINDOW; old ones (PMC edits, removals, retries of old
