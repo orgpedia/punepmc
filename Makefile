@@ -69,7 +69,7 @@ help:
 	@echo "  sync_hf_push             hf upload: LFS/punePMC/$(HF_DIR) -> $(HF_REPO) (unchanged files skipped)"
 	@echo "  hf_card                  hf upload: input/hf/README.md -> $(HF_REPO)"
 	@echo "  sync_hf_pull             git pull, hf download: $(HF_REPO) -> LFS/punePMC, then relink (e.g. after a fresh clone)"
-	@echo "  git_pull                 git pull --ff-only the state files (run first by sync_hf_pull, daily, backfill; skipped on CI)"
+	@echo "  git_pull                 git pull --rebase the state files (run first by sync_hf_pull, daily, backfill; skipped on CI)"
 	@echo "  status                   counts + site vs archive.org check           [IA_CHECK=$(IA_CHECK)]"
 	@echo ""
 	@echo "Credentials come from .env (see env.example) or the environment (GitHub Actions secrets)."
@@ -136,13 +136,13 @@ setup: install
 	$(MAKE) --no-print-directory status || rc=1; \
 	exit $$rc
 
-# GitHub Actions commits to the state files daily, so local runs start from the latest copy. --ff-only never merges:
-# if the local copy has diverged (or untracked files are in the way) it stops, and you resolve it with `git pull --rebase`.
+# GitHub Actions commits to the state files daily, so local runs start from the latest copy. --rebase replays unpushed
+# local commits on top; it stops (before any step runs) on uncommitted changes, a conflict or untracked files in the way.
 git_pull:
 ifeq ($(GITHUB_ACTIONS),true)
 	@true
 else
-	git pull --ff-only
+	git pull --rebase
 endif
 
 # daily/backfill run on GitHub Actions; never let them do a first-time setup there
