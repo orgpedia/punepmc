@@ -7,6 +7,7 @@ SPN2 docs: https://docs.google.com/document/d/1Nsv52MvSjbLb2PCpHlat0gkzw0EvtSgpK
 """
 
 import argparse
+import sys
 import time
 
 import requests
@@ -138,8 +139,9 @@ def main(args):
     finally:
         write_records("wayback", wayback)
 
-    print(f"*** Linked: {len(linked)}")
+    print(f"*** Linked: {len(linked)} of {len(todo)}")
     print(f"*** Failed: {len(failed)} {failed[:20]}")
+    sys.exit(1 if failed else 0)  # like the other steps, so a blocked Wayback shows up as a red run
 
 
 if __name__ == "__main__":
