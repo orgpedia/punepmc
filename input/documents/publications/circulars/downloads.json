@@ -175954,5 +175954,119 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40158,
+    "nids": [
+      43189
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Rashtriya%20Ekta%20din_2.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-30.01.pdf"
+    ],
+    "size": 219923,
+    "sha1": "664434c4659e18cb38c5fafb4f507d248cde8b6d",
+    "last_modified": "Fri, 30 Oct 2026 06:50:56 GMT",
+    "etag": "\"6ae43e50-35b13\"",
+    "download_time_utc": "2026-10-30 20:39:00 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40194,
+    "nids": [
+      43203
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Professor%20Order.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-30.02.pdf"
+    ],
+    "size": 3934763,
+    "sha1": "03b2f15c330b2954aa094dda23077d331032fa53",
+    "last_modified": "Fri, 30 Oct 2026 12:54:47 GMT",
+    "etag": "\"6ae49397-3c0a2b\"",
+    "download_time_utc": "2026-10-30 20:39:03 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40195,
+    "nids": [
+      43205
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Assistant%20Professor%20order.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-30.03.pdf"
+    ],
+    "size": 4565054,
+    "sha1": "32419587d0f80e94b59b9fe128308ead46716192",
+    "last_modified": "Fri, 30 Oct 2026 12:57:30 GMT",
+    "etag": "\"6ae4943a-45a83e\"",
+    "download_time_utc": "2026-10-30 20:39:07 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40196,
+    "nids": [
+      43207
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Associate%20Professor%20order.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-30.04.pdf"
+    ],
+    "size": 4041018,
+    "sha1": "fc8856820f1240e362b1ab35bcee376a8142ad96",
+    "last_modified": "Fri, 30 Oct 2026 12:59:15 GMT",
+    "etag": "\"6ae494a3-3da93a\"",
+    "download_time_utc": "2026-10-30 20:39:10 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40197,
+    "nids": [
+      43209
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7936.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Oct-30.05.pdf"
+    ],
+    "size": 1693947,
+    "sha1": "c9f86021394b536ac3cf0b2694d1280c65b4c0dc",
+    "last_modified": "Fri, 30 Oct 2026 14:08:51 GMT",
+    "etag": "\"6ae4a4f3-19d8fb\"",
+    "download_time_utc": "2026-10-30 20:39:12 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40199,
+    "nids": [
+      43211
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/2716%2030102026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/accounts.2026-Oct-30.01.pdf"
+    ],
+    "size": 1051667,
+    "sha1": "e59d72330bacc50c060249b5a588a755129e984f",
+    "last_modified": "Fri, 30 Oct 2026 16:42:41 GMT",
+    "etag": "\"6ae4c901-100c13\"",
+    "download_time_utc": "2026-10-30 20:39:14 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]

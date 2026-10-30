@@ -1,0 +1,38 @@
+[
+  {
+    "time_utc": "2026-10-30 20:38:52 UTC+0000",
+    "nid": 43189,
+    "doc_id": "gad.2026-Oct-30.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-30 20:38:52 UTC+0000",
+    "nid": 43203,
+    "doc_id": "gad.2026-Oct-30.02",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-30 20:38:52 UTC+0000",
+    "nid": 43205,
+    "doc_id": "gad.2026-Oct-30.03",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-30 20:38:52 UTC+0000",
+    "nid": 43207,
+    "doc_id": "gad.2026-Oct-30.04",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-30 20:38:52 UTC+0000",
+    "nid": 43209,
+    "doc_id": "gad.2026-Oct-30.05",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-10-30 20:38:52 UTC+0000",
+    "nid": 43211,
+    "doc_id": "accounts.2026-Oct-30.01",
+    "event": "new"
+  }
+]

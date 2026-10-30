@@ -60,6 +60,18 @@
     "message": ""
   },
   {
+    "doc_id": "accounts.2026-Oct-30.01",
+    "fid": 40199,
+    "identifier": "in.gov.pmc.circular.accounts.2026-Oct-30.01",
+    "collection": "opensource",
+    "sha1": "e59d72330bacc50c060249b5a588a755129e984f",
+    "time_utc": "2026-10-30 20:41:26 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.accounts.2026-Oct-30.01",
+    "metadata_sha1": "1e20cd2a871f98ee43f5afd191e3a5e0e1cd7de9",
+    "message": ""
+  },
+  {
     "doc_id": "amc-estate.2024-Dec-24.01",
     "fid": 1576,
     "identifier": "in.gov.pmc.circular.amc-estate.2024-Dec-24.01",
@@ -609,6 +621,66 @@
     "upload_success": true,
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-29.03",
     "metadata_sha1": "a664ac43ed1994c9f47bcb8a4059d9e1dee5f0d4",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Oct-30.01",
+    "fid": 40158,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-30.01",
+    "collection": "opensource",
+    "sha1": "664434c4659e18cb38c5fafb4f507d248cde8b6d",
+    "time_utc": "2026-10-30 20:39:16 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-30.01",
+    "metadata_sha1": "3ce0e4c5121599f5a0fe99cd23bc2242db688b13",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Oct-30.02",
+    "fid": 40194,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-30.02",
+    "collection": "opensource",
+    "sha1": "03b2f15c330b2954aa094dda23077d331032fa53",
+    "time_utc": "2026-10-30 20:39:37 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-30.02",
+    "metadata_sha1": "545c45214b49260165d27fc3e587bc90ee31c2db",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Oct-30.03",
+    "fid": 40195,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-30.03",
+    "collection": "opensource",
+    "sha1": "32419587d0f80e94b59b9fe128308ead46716192",
+    "time_utc": "2026-10-30 20:39:54 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-30.03",
+    "metadata_sha1": "cc495aaa18b1cade559dca51487689de002a5368",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Oct-30.04",
+    "fid": 40196,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-30.04",
+    "collection": "opensource",
+    "sha1": "fc8856820f1240e362b1ab35bcee376a8142ad96",
+    "time_utc": "2026-10-30 20:40:13 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-30.04",
+    "metadata_sha1": "3e04a0374a16a1472bea2b5ebb941ca0b82de44e",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Oct-30.05",
+    "fid": 40197,
+    "identifier": "in.gov.pmc.circular.gad.2026-Oct-30.05",
+    "collection": "opensource",
+    "sha1": "c9f86021394b536ac3cf0b2694d1280c65b4c0dc",
+    "time_utc": "2026-10-30 20:40:29 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Oct-30.05",
+    "metadata_sha1": "280e479ca2164bcbffbbacf9ec3114e88eed34c0",
     "message": ""
   },
   {
