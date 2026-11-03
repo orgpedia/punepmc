@@ -1,0 +1,38 @@
+[
+  {
+    "time_utc": "2026-11-03 21:39:59 UTC+0000",
+    "nid": 43224,
+    "doc_id": "building.2026-Nov-02.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-03 21:39:59 UTC+0000",
+    "nid": 43235,
+    "doc_id": "labour.2026-Nov-02.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-03 21:39:59 UTC+0000",
+    "nid": 43237,
+    "doc_id": "gad.2026-Nov-02.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-03 21:39:59 UTC+0000",
+    "nid": 43240,
+    "doc_id": "labour.2026-Nov-02.02",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-03 21:39:59 UTC+0000",
+    "nid": 43259,
+    "doc_id": "gad.2026-Nov-02.02",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-03 21:39:59 UTC+0000",
+    "nid": 43276,
+    "doc_id": "drainage.2026-Nov-03.01",
+    "event": "new"
+  }
+]

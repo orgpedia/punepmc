@@ -176068,5 +176068,119 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40251,
+    "nids": [
+      43224
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/2026.10.30_Appointment%20of%20TPO%20for%2023%20villages_MC%20order.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/building.2026-Nov-02.01.pdf"
+    ],
+    "size": 1372781,
+    "sha1": "c27b01c9a03e811d3fc58c53745b4b153aa99088",
+    "last_modified": "Mon, 02 Nov 2026 07:20:45 GMT",
+    "etag": "\"6ae839cd-14f26d\"",
+    "download_time_utc": "2026-11-03 21:40:12 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40269,
+    "nids": [
+      43235
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Contract%20Labour%20Gift%20Circular.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/labour.2026-Nov-02.01.pdf"
+    ],
+    "size": 1898668,
+    "sha1": "f445676f7d2b40c009298f66be498434a5f2717b",
+    "last_modified": "Mon, 02 Nov 2026 10:56:57 GMT",
+    "etag": "\"6ae86c79-1cf8ac\"",
+    "download_time_utc": "2026-11-03 21:40:15 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40272,
+    "nids": [
+      43237
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7973_02112026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-02.01.pdf"
+    ],
+    "size": 322440,
+    "sha1": "1f041100c5266c362b661f2edcf7f0ecfc854bf6",
+    "last_modified": "Mon, 02 Nov 2026 11:15:38 GMT",
+    "etag": "\"6ae870da-4eb88\"",
+    "download_time_utc": "2026-11-03 21:40:17 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40274,
+    "nids": [
+      43240
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Sukanya%20Yojna%20Post.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/labour.2026-Nov-02.02.pdf"
+    ],
+    "size": 4300933,
+    "sha1": "5ff72a322d127c1481690f3186a7d33bbeba5cca",
+    "last_modified": "Mon, 02 Nov 2026 12:37:51 GMT",
+    "etag": "\"6ae8841f-41a085\"",
+    "download_time_utc": "2026-11-03 21:40:24 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40288,
+    "nids": [
+      43259
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7974_02112026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-02.02.pdf"
+    ],
+    "size": 216865,
+    "sha1": "1758cd16841a092bc41d37d70f0370d2795536b2",
+    "last_modified": "Tue, 03 Nov 2026 05:07:34 GMT",
+    "etag": "\"6ae96c16-34f21\"",
+    "download_time_utc": "2026-11-03 21:40:25 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40365,
+    "nids": [
+      43276
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Regarding%20the%20inclusion%20of%20contractor%20Ms.%20Shubham%20Ashok%20Khatode%20in%20the%20blacklist..pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/drainage.2026-Nov-03.01.pdf"
+    ],
+    "size": 1626722,
+    "sha1": "6d64cd9c36222491f09d520e4930bd5287a58d53",
+    "last_modified": "Tue, 03 Nov 2026 11:18:24 GMT",
+    "etag": "\"6ae9c300-18d262\"",
+    "download_time_utc": "2026-11-03 21:40:29 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]

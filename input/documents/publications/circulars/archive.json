@@ -756,6 +756,16 @@
     "message": ""
   },
   {
+    "doc_id": "building.2026-Nov-02.01",
+    "fid": 40251,
+    "identifier": "in.gov.pmc.circular.building.2026-Nov-02.01",
+    "collection": "opensource",
+    "sha1": "c27b01c9a03e811d3fc58c53745b4b153aa99088",
+    "time_utc": "2026-11-03 21:40:30 UTC+0000",
+    "upload_success": false,
+    "message": " error uploading building.2026-Nov-02.01.pdf to in.gov.pmc.circular.building.2026-Nov-02.01, Please reduce your request rate. - total_tasks_queued exceeds global_limit"
+  },
+  {
     "doc_id": "building.2026-Oct-27.01",
     "fid": 39979,
     "identifier": "in.gov.pmc.circular.building.2026-Oct-27.01",
@@ -1102,6 +1112,16 @@
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.drainage.2024-Apr-10.01",
     "metadata_sha1": "0bdc189b736b84f68a608e37610b29f00e6d10ea",
     "message": ""
+  },
+  {
+    "doc_id": "drainage.2026-Nov-03.01",
+    "fid": 40365,
+    "identifier": "in.gov.pmc.circular.drainage.2026-Nov-03.01",
+    "collection": "opensource",
+    "sha1": "6d64cd9c36222491f09d520e4930bd5287a58d53",
+    "time_utc": "2026-11-03 21:52:09 UTC+0000",
+    "upload_success": false,
+    "message": " error uploading drainage.2026-Nov-03.01.pdf to in.gov.pmc.circular.drainage.2026-Nov-03.01, Please reduce your request rate. - total_tasks_queued exceeds global_limit"
   },
   {
     "doc_id": "election.2024-Apr-12.01",
@@ -8972,6 +8992,28 @@
     "message": ""
   },
   {
+    "doc_id": "gad.2026-Nov-02.01",
+    "fid": 40272,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-02.01",
+    "collection": "opensource",
+    "sha1": "1f041100c5266c362b661f2edcf7f0ecfc854bf6",
+    "time_utc": "2026-11-03 21:46:03 UTC+0000",
+    "upload_success": false,
+    "message": " error uploading gad.2026-Nov-02.01.pdf to in.gov.pmc.circular.gad.2026-Nov-02.01, Please reduce your request rate. - total_tasks_queued exceeds global_limit"
+  },
+  {
+    "doc_id": "gad.2026-Nov-02.02",
+    "fid": 40288,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-02.02",
+    "collection": "opensource",
+    "sha1": "1758cd16841a092bc41d37d70f0370d2795536b2",
+    "time_utc": "2026-11-03 21:49:16 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Nov-02.02",
+    "metadata_sha1": "8af0b865df9a42e60cc7240d98c931d42fb0ccec",
+    "message": ""
+  },
+  {
     "doc_id": "gad.2026-Oct-19.01",
     "fid": 39600,
     "identifier": "in.gov.pmc.circular.gad.2026-Oct-19.01",
@@ -10357,6 +10399,28 @@
     "upload_success": true,
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2025-Mar-07.01",
     "metadata_sha1": "9e92421560d5650c4630cb6aad2a8013743a12fc",
+    "message": ""
+  },
+  {
+    "doc_id": "labour.2026-Nov-02.01",
+    "fid": 40269,
+    "identifier": "in.gov.pmc.circular.labour.2026-Nov-02.01",
+    "collection": "opensource",
+    "sha1": "f445676f7d2b40c009298f66be498434a5f2717b",
+    "time_utc": "2026-11-03 21:43:18 UTC+0000",
+    "upload_success": false,
+    "message": " error uploading labour.2026-Nov-02.01.pdf to in.gov.pmc.circular.labour.2026-Nov-02.01, Please reduce your request rate. - total_tasks_queued exceeds global_limit"
+  },
+  {
+    "doc_id": "labour.2026-Nov-02.02",
+    "fid": 40274,
+    "identifier": "in.gov.pmc.circular.labour.2026-Nov-02.02",
+    "collection": "opensource",
+    "sha1": "5ff72a322d127c1481690f3186a7d33bbeba5cca",
+    "time_utc": "2026-11-03 21:48:55 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2026-Nov-02.02",
+    "metadata_sha1": "260bef42d0ed2533e7b820d8e02218c30698444b",
     "message": ""
   },
   {
