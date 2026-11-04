@@ -1,0 +1,56 @@
+[
+  {
+    "time_utc": "2026-11-04 21:48:06 UTC+0000",
+    "nid": 43279,
+    "doc_id": "gad.2026-Nov-04.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-04 21:48:06 UTC+0000",
+    "nid": 43283,
+    "doc_id": "gad.2026-Nov-04.02",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-04 21:48:06 UTC+0000",
+    "nid": 43285,
+    "doc_id": "gad.2026-Nov-04.03",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-04 21:48:06 UTC+0000",
+    "nid": 43287,
+    "doc_id": "gad.2026-Nov-04.04",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-04 21:48:06 UTC+0000",
+    "nid": 43289,
+    "doc_id": "gad.2026-Nov-04.05",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-04 21:48:06 UTC+0000",
+    "nid": 43291,
+    "doc_id": "gad.2026-Nov-04.06",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-04 21:48:06 UTC+0000",
+    "nid": 43293,
+    "doc_id": "gad.2026-Nov-04.07",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-04 21:48:06 UTC+0000",
+    "nid": 43295,
+    "doc_id": "gad.2026-Nov-04.08",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-04 21:48:06 UTC+0000",
+    "nid": 43316,
+    "doc_id": "gad.2026-Nov-04.09",
+    "event": "new"
+  }
+]

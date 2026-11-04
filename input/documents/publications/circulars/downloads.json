@@ -176182,5 +176182,176 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40371,
+    "nids": [
+      43279
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7941-02.11.2026%20Chimate.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-04.01.pdf"
+    ],
+    "size": 2894706,
+    "sha1": "d9370d575bb1036aa314b4b45ef5837d4b5c343f",
+    "last_modified": "Wed, 04 Nov 2026 05:43:31 GMT",
+    "etag": "\"6aeac603-2c2b72\"",
+    "download_time_utc": "2026-11-04 21:48:29 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40379,
+    "nids": [
+      43283
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7943-02.11.2026%20Ingawale.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-04.02.pdf"
+    ],
+    "size": 2832459,
+    "sha1": "2b9ba969cc51ae4198954fd2754de47580080c07",
+    "last_modified": "Wed, 04 Nov 2026 05:51:15 GMT",
+    "etag": "\"6aeac7d3-2b384b\"",
+    "download_time_utc": "2026-11-04 21:48:41 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40380,
+    "nids": [
+      43285
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7967-02.11.2026%20Jagtap.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-04.03.pdf"
+    ],
+    "size": 2956963,
+    "sha1": "4c04c8c349118482ead81ba3fa5d1ae98e8ec675",
+    "last_modified": "Wed, 04 Nov 2026 05:55:21 GMT",
+    "etag": "\"6aeac8c9-2d1ea3\"",
+    "download_time_utc": "2026-11-04 21:48:47 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40381,
+    "nids": [
+      43287
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7984-02.11.2026%20Gadhave.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-04.04.pdf"
+    ],
+    "size": 2718346,
+    "sha1": "bd5a0c9374a178263a64ddfc8ac087d6c0257f81",
+    "last_modified": "Wed, 04 Nov 2026 05:58:34 GMT",
+    "etag": "\"6aeac98a-297a8a\"",
+    "download_time_utc": "2026-11-04 21:48:56 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40382,
+    "nids": [
+      43289
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8017-03.11.2026%20Gole.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-04.05.pdf"
+    ],
+    "size": 2792085,
+    "sha1": "9928321669ada9ccef24f788ff21d99617588232",
+    "last_modified": "Wed, 04 Nov 2026 06:04:12 GMT",
+    "etag": "\"6aeacadc-2a9a95\"",
+    "download_time_utc": "2026-11-04 21:49:06 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40383,
+    "nids": [
+      43291
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8027-03.11.2026%20Padye.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-04.06.pdf"
+    ],
+    "size": 2918729,
+    "sha1": "2190a43b408dfb7244c4823b82bef7b0b9fa14af",
+    "last_modified": "Wed, 04 Nov 2026 06:10:49 GMT",
+    "etag": "\"6aeacc69-2c8949\"",
+    "download_time_utc": "2026-11-04 21:49:24 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40384,
+    "nids": [
+      43293
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8028-03.11.2026%20Dorge.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-04.07.pdf"
+    ],
+    "size": 2837621,
+    "sha1": "10716252a6c4c60dcdf47a2f419739b1bc1deb42",
+    "last_modified": "Wed, 04 Nov 2026 06:13:53 GMT",
+    "etag": "\"6aeacd21-2b4c75\"",
+    "download_time_utc": "2026-11-04 21:49:43 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40385,
+    "nids": [
+      43295
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8029-03.11.2026%20Benkar.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-04.08.pdf"
+    ],
+    "size": 2830108,
+    "sha1": "7402d1817d4698574e0b9f047273891737747e57",
+    "last_modified": "Wed, 04 Nov 2026 06:18:05 GMT",
+    "etag": "\"6aeace1d-2b2f1c\"",
+    "download_time_utc": "2026-11-04 21:49:56 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40524,
+    "nids": [
+      43316
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8100_04112026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-04.09.pdf"
+    ],
+    "size": 300553,
+    "sha1": "9df7d76aa3859b2729f5a6fd1c945223f1456030",
+    "last_modified": "Wed, 04 Nov 2026 11:58:46 GMT",
+    "etag": "\"6aeb1df6-49609\"",
+    "download_time_utc": "2026-11-04 21:49:59 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
