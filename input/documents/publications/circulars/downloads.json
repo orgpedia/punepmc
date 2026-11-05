@@ -176353,5 +176353,62 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40571,
+    "nids": [
+      43352
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7480_22102026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-05.01.pdf"
+    ],
+    "size": 240879,
+    "sha1": "c4636b08bef02fe64dd1da67a236e4f8ac0f0b64",
+    "last_modified": "Thu, 05 Nov 2026 07:44:08 GMT",
+    "etag": "\"6aec33c8-3acef\"",
+    "download_time_utc": "2026-11-05 21:54:20 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40572,
+    "nids": [
+      43354
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8078_04112026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-05.02.pdf"
+    ],
+    "size": 262141,
+    "sha1": "56fdcb1b46d3526e9e17e3f0156382f4ee2021b4",
+    "last_modified": "Thu, 05 Nov 2026 07:49:13 GMT",
+    "etag": "\"6aec34f9-3fffd\"",
+    "download_time_utc": "2026-11-05 21:54:22 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40573,
+    "nids": [
+      43356
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/7751_28102026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-05.03.pdf"
+    ],
+    "size": 250964,
+    "sha1": "dffa94553d487b64d391b00fb825b5f4290c71bc",
+    "last_modified": "Thu, 05 Nov 2026 07:54:41 GMT",
+    "etag": "\"6aec3641-3d454\"",
+    "download_time_utc": "2026-11-05 21:54:24 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
