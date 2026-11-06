@@ -176410,5 +176410,81 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40609,
+    "nids": [
+      43368
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/circular%20Diwali%20gift.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/building.2026-Nov-06.01.pdf"
+    ],
+    "size": 574499,
+    "sha1": "be4c46722dcbad1395f9054c8d63f3a3d255d415",
+    "last_modified": "Fri, 06 Nov 2026 06:37:57 GMT",
+    "etag": "\"6aed75c5-8c423\"",
+    "download_time_utc": "2026-11-06 21:26:21 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40610,
+    "nids": [
+      43370
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Circular%20Safety%20Compliance%20Checklist.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/building.2026-Nov-06.02.pdf"
+    ],
+    "size": 1659107,
+    "sha1": "a41fa478b391dc4a01d122a450968d9e6c08db7a",
+    "last_modified": "Fri, 06 Nov 2026 06:44:35 GMT",
+    "etag": "\"6aed7753-1950e3\"",
+    "download_time_utc": "2026-11-06 21:26:23 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40624,
+    "nids": [
+      43393
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/November2026pensionmtg..pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/labour.2026-Nov-06.01.pdf"
+    ],
+    "size": 1497667,
+    "sha1": "12af29620a2d11771038825b752cacb92bd803fe",
+    "last_modified": "Fri, 06 Nov 2026 12:05:18 GMT",
+    "etag": "\"6aedc27e-16da43\"",
+    "download_time_utc": "2026-11-06 21:26:25 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40626,
+    "nids": [
+      43395
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8272%2006112026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-06.01.pdf"
+    ],
+    "size": 207792,
+    "sha1": "c16b62b869d7f31578857efefedd1ec65e6f6d61",
+    "last_modified": "Fri, 06 Nov 2026 12:45:04 GMT",
+    "etag": "\"6aedcbd0-32bb0\"",
+    "download_time_utc": "2026-11-06 21:26:27 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]

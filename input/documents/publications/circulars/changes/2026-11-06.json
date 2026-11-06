@@ -1,0 +1,26 @@
+[
+  {
+    "time_utc": "2026-11-06 21:26:10 UTC+0000",
+    "nid": 43368,
+    "doc_id": "building.2026-Nov-06.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-06 21:26:10 UTC+0000",
+    "nid": 43370,
+    "doc_id": "building.2026-Nov-06.02",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-06 21:26:10 UTC+0000",
+    "nid": 43393,
+    "doc_id": "labour.2026-Nov-06.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-06 21:26:10 UTC+0000",
+    "nid": 43395,
+    "doc_id": "gad.2026-Nov-06.01",
+    "event": "new"
+  }
+]
