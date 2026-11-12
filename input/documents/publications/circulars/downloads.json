@@ -176486,5 +176486,43 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40640,
+    "nids": [
+      43428
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Diwali%20Gift%20Ekvat%20Mandhan%20Staff.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/labour.2026-Nov-12.01.pdf"
+    ],
+    "size": 765152,
+    "sha1": "6b6431b9f885c61616ae710c53dbea78ecac2ba7",
+    "last_modified": "Thu, 12 Nov 2026 08:19:04 GMT",
+    "etag": "\"6af57678-bace0\"",
+    "download_time_utc": "2026-11-12 22:10:47 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40656,
+    "nids": [
+      43445
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/0001_082_0.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-12.01.pdf"
+    ],
+    "size": 194329,
+    "sha1": "98b999ef11cf0fec1746b23aecec33672289228d",
+    "last_modified": "Thu, 12 Nov 2026 13:02:24 GMT",
+    "etag": "\"6af5b8e0-2f719\"",
+    "download_time_utc": "2026-11-12 22:10:49 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]

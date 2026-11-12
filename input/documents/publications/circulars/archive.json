@@ -17236,6 +17236,18 @@
     "message": ""
   },
   {
+    "doc_id": "gad.2026-Nov-12.01",
+    "fid": 40656,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-12.01",
+    "collection": "opensource",
+    "sha1": "98b999ef11cf0fec1746b23aecec33672289228d",
+    "time_utc": "2026-11-12 22:11:04 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Nov-12.01",
+    "metadata_sha1": "94d35fe79bef8e8ae9d824c883b1dfdd4b899015",
+    "message": ""
+  },
+  {
     "doc_id": "gad.2026-Oct-19.01",
     "fid": 39600,
     "identifier": "in.gov.pmc.circular.gad.2026-Oct-19.01",
@@ -20003,6 +20015,18 @@
     "upload_success": true,
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2026-Nov-06.01",
     "metadata_sha1": "6dc6e7924725253afd616baa67cb0d3979e66e6a",
+    "message": ""
+  },
+  {
+    "doc_id": "labour.2026-Nov-12.01",
+    "fid": 40640,
+    "identifier": "in.gov.pmc.circular.labour.2026-Nov-12.01",
+    "collection": "opensource",
+    "sha1": "6b6431b9f885c61616ae710c53dbea78ecac2ba7",
+    "time_utc": "2026-11-12 22:10:50 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2026-Nov-12.01",
+    "metadata_sha1": "dc3b4fd248f9466631df74457bb3f3a37bd5c6fc",
     "message": ""
   },
   {
