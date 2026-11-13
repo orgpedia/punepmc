@@ -1,0 +1,20 @@
+[
+  {
+    "time_utc": "2026-11-13 21:53:46 UTC+0000",
+    "nid": 43451,
+    "doc_id": "gad.2026-Nov-13.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-13 21:53:46 UTC+0000",
+    "nid": 43458,
+    "doc_id": "gad.2026-Nov-13.02",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-13 21:53:46 UTC+0000",
+    "nid": 43470,
+    "doc_id": "accounts.2026-Nov-13.01",
+    "event": "new"
+  }
+]

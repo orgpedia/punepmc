@@ -176524,5 +176524,62 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40660,
+    "nids": [
+      43451
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Stenographer%28Selection%20grade%29%20Order.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-13.01.pdf"
+    ],
+    "size": 1618718,
+    "sha1": "0b403de8f0bfbb79a9611af087990578894d2ea9",
+    "last_modified": "Fri, 13 Nov 2026 06:34:07 GMT",
+    "etag": "\"6af6af5f-18b31e\"",
+    "download_time_utc": "2026-11-13 21:53:56 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40670,
+    "nids": [
+      43458
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/bhavika%20thakur.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-13.02.pdf"
+    ],
+    "size": 704775,
+    "sha1": "0bdd8287a04e4ea62039b0247471a9ff4e68335f",
+    "last_modified": "Fri, 13 Nov 2026 10:56:09 GMT",
+    "etag": "\"6af6ecc9-ac107\"",
+    "download_time_utc": "2026-11-13 21:53:57 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40676,
+    "nids": [
+      43470
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Office%20Circular_4.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/accounts.2026-Nov-13.01.pdf"
+    ],
+    "size": 281231,
+    "sha1": "746eb92eb5a08698afb1240842fe4494122b2fbb",
+    "last_modified": "Fri, 13 Nov 2026 12:18:42 GMT",
+    "etag": "\"6af70022-44a8f\"",
+    "download_time_utc": "2026-11-13 21:53:59 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
