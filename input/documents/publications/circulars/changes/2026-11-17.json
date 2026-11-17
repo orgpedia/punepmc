@@ -4,5 +4,17 @@
     "nid": 43495,
     "doc_id": "gad.2026-Nov-16.01",
     "event": "new"
+  },
+  {
+    "time_utc": "2026-11-17 23:26:52 UTC+0000",
+    "nid": 43557,
+    "doc_id": "gad.2026-Nov-17.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-17 23:26:52 UTC+0000",
+    "nid": 43559,
+    "doc_id": "gad.2026-Nov-17.02",
+    "event": "new"
   }
 ]

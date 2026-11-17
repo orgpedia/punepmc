@@ -176600,5 +176600,43 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40845,
+    "nids": [
+      43557
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/je%20civil%20waiting%20order.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-17.01.pdf"
+    ],
+    "size": 1023625,
+    "sha1": "d94626d5a73ed797ca89ef5565e66bd98ab1a792",
+    "last_modified": "Tue, 17 Nov 2026 13:18:27 GMT",
+    "etag": "\"6afc5423-f9e89\"",
+    "download_time_utc": "2026-11-17 23:26:56 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40846,
+    "nids": [
+      43559
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8444%2017112026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-17.02.pdf"
+    ],
+    "size": 219596,
+    "sha1": "e873184c8184f5a13a8484e6db9afb8ddd982084",
+    "last_modified": "Tue, 17 Nov 2026 13:31:03 GMT",
+    "etag": "\"6afc5717-359cc\"",
+    "download_time_utc": "2026-11-17 23:26:58 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]

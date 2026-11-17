@@ -25530,6 +25530,26 @@
     "message": ""
   },
   {
+    "doc_id": "gad.2026-Nov-17.01",
+    "fid": 40845,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-17.01",
+    "collection": "opensource",
+    "sha1": "d94626d5a73ed797ca89ef5565e66bd98ab1a792",
+    "time_utc": "2026-11-17 23:26:59 UTC+0000",
+    "upload_success": false,
+    "message": " error uploading gad.2026-Nov-17.01.pdf to in.gov.pmc.circular.gad.2026-Nov-17.01, Please reduce your request rate. - total_tasks_queued exceeds global_limit"
+  },
+  {
+    "doc_id": "gad.2026-Nov-17.02",
+    "fid": 40846,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-17.02",
+    "collection": "opensource",
+    "sha1": "e873184c8184f5a13a8484e6db9afb8ddd982084",
+    "time_utc": "2026-11-17 23:29:54 UTC+0000",
+    "upload_success": false,
+    "message": " error uploading gad.2026-Nov-17.02.pdf to in.gov.pmc.circular.gad.2026-Nov-17.02, Please reduce your request rate. - total_tasks_queued exceeds global_limit"
+  },
+  {
     "doc_id": "gad.2026-Oct-19.01",
     "fid": 39600,
     "identifier": "in.gov.pmc.circular.gad.2026-Oct-19.01",
