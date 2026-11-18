@@ -14,14 +14,18 @@ LIMIT ?=
 SCOPE ?= all
 NEW_WINDOW ?= 7d
 DOWNLOAD_DELAY ?= 1
-# 1 = also retry downloads that failed with 404 / not a PDF
+# 1 = also retry downloads that failed with 404 / unknown type, and files archive.org rejected
 RETRY_FAILED ?= 0
 # Wayback SPN2: reuse an existing capture newer than this instead of re-capturing
 WAYBACK_REUSE ?= 30d
 # setup uploads only this many circulars to archive.org (oldest first; empty = all); the rest via `backfill WHAT=archive`
 SETUP_ARCHIVE_LIMIT ?= 55
-# archive.org collection (opensource = Community Texts)
-IA_COLLECTION ?= opensource
+# archive.org collection (archive.org adds its parent, government-documents)
+IA_COLLECTION ?= pune-pmc
+# seconds to pause between archive.org items (upload_archive, update_archive_metadata)
+IA_DELAY ?= 5
+# the weekly crawl refreshes metadata of, and uploads, at most this many items each, so it ends well inside GitHub's time limit
+CRAWL_ARCHIVE_LIMIT ?= 300
 # 0 = status skips the site vs archive.org search
 IA_CHECK ?= 1
 # 0 = daily skips Wayback (GitHub Actions: SPN2 blocks GitHub's IPs with HTTP 429, so Wayback runs locally)
@@ -57,7 +61,8 @@ help:
 	@echo "                           WAYBACK=0 skips link_wayback (used on GitHub Actions)"
 	@echo "  backfill WHAT=archive    upload the archive.org backlog              [LIMIT=$(LIMIT)]"
 	@echo "  backfill WHAT=wayback    capture the Wayback backlog                 [LIMIT=$(LIMIT)]"
-	@echo "  backfill WHAT=crawl      re-crawl the whole site, fetch missing/changed PDFs, upload new ones"
+	@echo "  backfill WHAT=crawl      re-crawl the whole site, fetch missing/changed PDFs, then refresh metadata and"
+	@echo "                           upload, each for up to CRAWL_ARCHIVE_LIMIT=$(CRAWL_ARCHIVE_LIMIT) items"
 	@echo ""
 	@echo "Steps"
 	@echo "  install                  set up the uv environment"
@@ -67,8 +72,8 @@ help:
 	@echo "  onetime_seed             one-time: move matching PDFs from $(SEED_DIR)"
 	@echo "  download                 download PDFs not yet downloaded             [SCOPE=$(SCOPE) RETRY_FAILED=$(RETRY_FAILED)]"
 	@echo "  link_wayback             Wayback SPN2 captures                        [SCOPE=$(SCOPE) LIMIT=$(LIMIT) WAYBACK_REUSE=$(WAYBACK_REUSE)]"
-	@echo "  upload_archive           upload to archive.org                        [SCOPE=$(SCOPE) LIMIT=$(LIMIT) IA_COLLECTION=$(IA_COLLECTION)]"
-	@echo "  update_archive_metadata  re-apply changed metadata to archive.org items"
+	@echo "  upload_archive           upload to archive.org                        [SCOPE=$(SCOPE) LIMIT=$(LIMIT) IA_COLLECTION=$(IA_COLLECTION) IA_DELAY=$(IA_DELAY)]"
+	@echo "  update_archive_metadata  re-apply changed metadata to archive.org items [LIMIT=$(LIMIT) IA_DELAY=$(IA_DELAY)]"
 	@echo "  sync_hf_push             hf upload: LFS/punePMC/$(HF_DIR) -> $(HF_REPO) (unchanged files skipped)"
 	@echo "  hf_card                  hf upload: input/hf/README.md -> $(HF_REPO)"
 	@echo "  sync_hf_pull             git pull, hf download: $(HF_REPO) -> LFS/punePMC, then relink (e.g. after a fresh clone)"
@@ -101,10 +106,10 @@ link_wayback:
 	$(call RUN,link_wayback.py $(SCOPE_ARG) --reuse $(WAYBACK_REUSE) $(LIMIT_ARG))
 
 upload_archive:
-	$(call RUN,upload_archive.py $(SCOPE_ARG) --collection $(IA_COLLECTION) $(LIMIT_ARG))
+	$(call RUN,upload_archive.py $(SCOPE_ARG) --collection $(IA_COLLECTION) --delay $(IA_DELAY) $(LIMIT_ARG) $(RETRY_ARG))
 
 update_archive_metadata:
-	$(call RUN,upload_archive.py --update-metadata --collection $(IA_COLLECTION))
+	$(call RUN,upload_archive.py --update-metadata --collection $(IA_COLLECTION) --delay $(IA_DELAY) $(LIMIT_ARG))
 
 # Pushes whatever is in LFS (on CI: only this run's new files); unchanged files are skipped, nothing is deleted on HF.
 # Large folders are split into several commits; re-run to resume an interrupted push.
@@ -186,8 +191,8 @@ backfill_crawl: require_setup
 	@rc=0; \
 	$(MAKE) --no-print-directory fetch_full || rc=1; \
 	$(MAKE) --no-print-directory download SCOPE=all || rc=1; \
-	$(MAKE) --no-print-directory upload_archive SCOPE=all || rc=1; \
-	$(MAKE) --no-print-directory update_archive_metadata || rc=1; \
+	$(MAKE) --no-print-directory update_archive_metadata LIMIT=$(CRAWL_ARCHIVE_LIMIT) || rc=1; \
+	$(MAKE) --no-print-directory upload_archive SCOPE=all LIMIT=$(CRAWL_ARCHIVE_LIMIT) || rc=1; \
 	$(MAKE) --no-print-directory sync_hf_push || rc=1; \
 	$(MAKE) --no-print-directory status || rc=1; \
 	exit $$rc

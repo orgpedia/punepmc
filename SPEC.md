@@ -335,13 +335,15 @@ Make variables:
 
 | Variable | Default | Used by |
 |---|---|---|
-| `LIMIT` | empty (no cap) | `link_wayback`, `upload_archive`, `backfill`: maximum items this run |
+| `LIMIT` | empty (no cap) | `link_wayback`, `upload_archive`, `update_archive_metadata`, `backfill`: maximum items this run |
 | `SCOPE` | `all` | `download`, `link_wayback`, `upload_archive`: `new` = circulars first seen within `NEW_WINDOW` |
 | `NEW_WINDOW` | `7d` | what `SCOPE=new` means; lets the daily run retry its own recent failures without touching the backlog |
 | `DOWNLOAD_DELAY` | `1` (s) | `download`, `fetch` |
-| `RETRY_FAILED` | `0` | `download`: also retry `failed:404` |
+| `RETRY_FAILED` | `0` | `download`: also retry `failed:404`; `upload_archive`: also retry files archive.org rejected ("unacceptable") |
 | `WAYBACK_REUSE` | `30d` | `link_wayback` |
-| `IA_COLLECTION` | `opensource` (Community Texts) | `upload_archive` |
+| `IA_COLLECTION` | `pune-pmc` (archive.org adds its parent `government-documents`) | `upload_archive`, `update_archive_metadata` |
+| `IA_DELAY` | `5` (s) | `upload_archive`, `update_archive_metadata`: pause between items |
+| `CRAWL_ARCHIVE_LIMIT` | `300` | `backfill WHAT=crawl`: at most this many metadata refreshes and this many uploads, so it ends inside GitHub's 5.5 h limit |
 | `SEED_DIR` | `../pmccirc/import/documents` | `onetime_seed` |
 | `SETUP_ARCHIVE_LIMIT` | `55` | `setup`: how many circulars (oldest nid first) it uploads to archive.org; empty = all |
 | `IA_CHECK` | `1` | `status`: `0` skips the site vs archive.org search (daily) |
@@ -407,7 +409,7 @@ Metadata (built in one function):
 
 | Field | Value |
 |---|---|
-| `collection` | `$(IA_COLLECTION)`: `opensource` (Community Texts) |
+| `collection` | `$(IA_COLLECTION)`: `pune-pmc`. Items uploaded before 18 Nov 2026 went to `opensource`; archive.org does not let us remove a collection, so `update_archive_metadata` adds `pune-pmc` in front (`[pune-pmc, opensource]`) |
 | `mediatype` | `texts`, for every file type: a JPEG of a circular is still a text, and all items stay in the same collection |
 | `title` | `title_en` if `title_en_is_english`, else `title_mr`. Replaced with the translation later, via `update_archive_metadata` |
 | `title_mr` | `title_mr` |
@@ -416,7 +418,7 @@ Metadata (built in one function):
 | `creator` | `Pune Municipal Corporation` (the department is in `subject` and the description) |
 | `publisher` | `Pune Municipal Corporation` |
 | `language` | `mar` |
-| `subject` | `Pune Municipal Corporation; Circular; <department en>` |
+| `subject` | `Circular; <department en>` (no year: `date` has it; the old `year` field is removed) |
 | `source` | `file_url` |
 | `source_page` | `https://www.pmc.gov.in/en/l/circular` |
 | `pmc_nid`, `pmc_fid`, `sha1` | ids and checksum |
@@ -428,6 +430,16 @@ Metadata (built in one function):
 ### `update_archive_metadata`
 Rebuilds the metadata for every uploaded doc_id and calls `modify_metadata` only where `metadata_sha1` differs (after title, date or department edits,
 a new Wayback link, a collection move, or later the translated title). It never uploads the PDFs again.
+Each call replaces the fields we set (lists like `subject` are replaced whole, not merged), removes fields we no longer set
+(`year`, or an empty `wayback_url`), and only ever adds collections. `--only DOC_ID,...` limits a run to given items, for testing.
+
+**Gentle on archive.org** (both targets): one item at a time with `IA_DELAY` seconds between items. Before each item it waits
+(checking every 60 s, giving up after 30 min) while IA-S3 reports itself overloaded or this account's queued tasks pass a share of
+its limit: `derive.php` (one per upload: OCR etc.; limit 500) above 80%, `modify_xml.php` (one per metadata change; limit 1000)
+above 10%. A "reduce your request rate", 429/5xx or timeout error backs off 5, 10 and 20 minutes and retries the item. If archive.org
+stays busy the run stops early ("Stopped early, archive.org busy"), which is not a failure; the next run resumes.
+The real pace is set by archive.org's derive queue, roughly 100–150 items a day: the 888 uploads of one crawl in Nov 2026 left
+~900 derives queued (over the 500 limit) for days. Uploading more just waits.
 
 The three Hugging Face targets use the `hf` CLI (from `huggingface_hub`) directly, no Python script. The token comes from `HF_TOKEN`
 (`uv run --env-file .env` locally, secrets on CI); the repo is `HF_REPO_ID` or `Orgpedia/punePMC`.
@@ -481,7 +493,7 @@ Runs: `fetch → download → link_wayback → upload_archive` (all `SCOPE=new`)
 |---|---|---|
 | `make backfill WHAT=archive LIMIT=500` | `upload_archive SCOPE=all` → `status` | finish archive.org uploads left over from setup |
 | `make backfill WHAT=wayback LIMIT=200` | `link_wayback SCOPE=all` → `update_archive_metadata` → `status` | slowly work through the ~8,900 Wayback captures, and add the new Wayback links to the archive.org items. **Local only**: run it every few days from your machine |
-| `make backfill WHAT=crawl` | `fetch_full → download → upload_archive → update_archive_metadata` (all `SCOPE=all`) `→ sync_hf_push → status` | weekly: re-read the whole site, apply PMC's edits to old circulars, fetch missing or replaced PDFs, upload anything not yet on archive.org, catch removals |
+| `make backfill WHAT=crawl` | `fetch_full → download SCOPE=all → update_archive_metadata → upload_archive SCOPE=all` (each capped at `CRAWL_ARCHIVE_LIMIT`) `→ sync_hf_push → status` | weekly: re-read the whole site, apply PMC's edits to old circulars, fetch missing or replaced PDFs, upload some of the archive.org backlog, catch removals |
 
 ## 7. GitHub Actions
 

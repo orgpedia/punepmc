@@ -3,13 +3,14 @@
     "doc_id": "accounts.2021-Dec-03.01",
     "fid": 8127,
     "identifier": "in.gov.pmc.circular.accounts.2021-Dec-03.01",
-    "collection": "opensource",
+    "collection": "pune-pmc",
     "sha1": "9a1b786c2c849a60536a8cddacac0e4cfb945f92",
     "time_utc": "2026-11-15 16:02:09 UTC+0000",
     "upload_success": true,
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.accounts.2021-Dec-03.01",
-    "metadata_sha1": "93b82c0a3cb2a6ef0c8d02830c0c2bfa993a5740",
-    "message": ""
+    "metadata_sha1": "736903645689c4ba7a0246296de6230ab955a025",
+    "message": "",
+    "metadata_time_utc": "2026-11-18 17:55:49 UTC+0000"
   },
   {
     "doc_id": "accounts.2021-Dec-07.01",
@@ -28797,13 +28798,14 @@
     "doc_id": "labour.2024-Dec-27.04",
     "fid": 1565,
     "identifier": "in.gov.pmc.circular.labour.2024-Dec-27.04",
-    "collection": "opensource",
+    "collection": "pune-pmc",
     "sha1": "fcdfc8ae02b3c4bc1a8b5fb6decc44345421ebe3",
     "time_utc": "2026-10-18 10:29:06 UTC+0000",
     "upload_success": true,
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2024-Dec-27.04",
-    "metadata_sha1": "f8e1eb1b73ff4ba24e9fcf430757a8287d802641",
-    "message": ""
+    "metadata_sha1": "3f1131a9e925e2dfbd06c75dc238d30fc5a51e2d",
+    "message": "",
+    "metadata_time_utc": "2026-11-18 17:55:27 UTC+0000"
   },
   {
     "doc_id": "labour.2024-Jul-01.01",
