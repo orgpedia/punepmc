@@ -176638,5 +176638,24 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40863,
+    "nids": [
+      43577
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Circular%20_0.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/labour.2026-Nov-18.01.pdf"
+    ],
+    "size": 797374,
+    "sha1": "b37529ac0827a60b996310ea9e081e5ddbcad5ac",
+    "last_modified": "Wed, 18 Nov 2026 07:59:00 GMT",
+    "etag": "\"6afd5ac4-c2abe\"",
+    "download_time_utc": "2026-11-18 22:57:23 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]

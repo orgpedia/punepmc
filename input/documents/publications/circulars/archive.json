@@ -25535,9 +25535,11 @@
     "identifier": "in.gov.pmc.circular.gad.2026-Nov-17.01",
     "collection": "opensource",
     "sha1": "d94626d5a73ed797ca89ef5565e66bd98ab1a792",
-    "time_utc": "2026-11-17 23:26:59 UTC+0000",
-    "upload_success": false,
-    "message": " error uploading gad.2026-Nov-17.01.pdf to in.gov.pmc.circular.gad.2026-Nov-17.01, Please reduce your request rate. - total_tasks_queued exceeds global_limit"
+    "time_utc": "2026-11-18 22:57:24 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Nov-17.01",
+    "metadata_sha1": "1e27e235fd42f98eb81a85dd21de43b67a3dea47",
+    "message": ""
   },
   {
     "doc_id": "gad.2026-Nov-17.02",
@@ -25545,9 +25547,11 @@
     "identifier": "in.gov.pmc.circular.gad.2026-Nov-17.02",
     "collection": "opensource",
     "sha1": "e873184c8184f5a13a8484e6db9afb8ddd982084",
-    "time_utc": "2026-11-17 23:29:54 UTC+0000",
-    "upload_success": false,
-    "message": " error uploading gad.2026-Nov-17.02.pdf to in.gov.pmc.circular.gad.2026-Nov-17.02, Please reduce your request rate. - total_tasks_queued exceeds global_limit"
+    "time_utc": "2026-11-18 22:58:42 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Nov-17.02",
+    "metadata_sha1": "ba674141423c83a5634eea9e281c9b699da970b2",
+    "message": ""
   },
   {
     "doc_id": "gad.2026-Oct-19.01",
@@ -29519,6 +29523,18 @@
     "upload_success": true,
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2026-Nov-12.01",
     "metadata_sha1": "dc3b4fd248f9466631df74457bb3f3a37bd5c6fc",
+    "message": ""
+  },
+  {
+    "doc_id": "labour.2026-Nov-18.01",
+    "fid": 40863,
+    "identifier": "in.gov.pmc.circular.labour.2026-Nov-18.01",
+    "collection": "opensource",
+    "sha1": "b37529ac0827a60b996310ea9e081e5ddbcad5ac",
+    "time_utc": "2026-11-18 22:59:04 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.labour.2026-Nov-18.01",
+    "metadata_sha1": "c2c0aba571106721684bd58b4b707ecda53357dd",
     "message": ""
   },
   {

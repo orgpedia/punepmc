@@ -213377,5 +213377,27 @@
     "first_seen_utc": "2026-11-17 23:26:41 UTC+0000",
     "last_seen_utc": "2026-11-17 23:26:41 UTC+0000",
     "removed_utc": null
+  },
+  {
+    "nid": 43577,
+    "doc_id": "labour.2026-Nov-18.01",
+    "uuid": "bc2aa4aa-cad1-4d62-b708-1a9de2a806e1",
+    "title_en": "Regarding the updating of information for the First Appellate Authority and the Public Information Officer.",
+    "title_mr": "प्रथम अपिलीय अधिकारी व जनमाहिती अधिकारी यांची माहिती अदययावत करणेबाबत.",
+    "title_en_is_english": true,
+    "circular_date": "2026-11-18",
+    "tid": 23,
+    "department": "Labour Welfare Department",
+    "created": "2026-11-18T07:59:02+00:00",
+    "changed": "2026-11-18T07:59:02+00:00",
+    "fid": 40863,
+    "file_url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Circular%20_0.pdf",
+    "filename": "Circular _0.pdf",
+    "filesize": 797374,
+    "same_file_as": [],
+    "status": "ok",
+    "first_seen_utc": "2026-11-18 22:54:52 UTC+0000",
+    "last_seen_utc": "2026-11-18 22:54:52 UTC+0000",
+    "removed_utc": null
   }
 ]
