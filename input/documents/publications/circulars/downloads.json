@@ -176657,5 +176657,43 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40965,
+    "nids": [
+      43669
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Budget%20Office%20Circular.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/accounts.2026-Nov-19.01.pdf"
+    ],
+    "size": 3666704,
+    "sha1": "4680c6670e7f6ffaf1d36e82f5e7b2cb2dac98d1",
+    "last_modified": "Thu, 19 Nov 2026 12:40:21 GMT",
+    "etag": "\"6afeee35-37f310\"",
+    "download_time_utc": "2026-11-19 22:59:29 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 40967,
+    "nids": [
+      43671
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/vikas%20arakhada%20order.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-19.01.pdf"
+    ],
+    "size": 844914,
+    "sha1": "05497e7349cb50aade7dc9a13178e6b24005efe9",
+    "last_modified": "Thu, 19 Nov 2026 13:02:56 GMT",
+    "etag": "\"6afef380-ce472\"",
+    "download_time_utc": "2026-11-19 22:59:31 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
