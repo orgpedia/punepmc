@@ -213443,5 +213443,27 @@
     "first_seen_utc": "2026-11-19 22:59:11 UTC+0000",
     "last_seen_utc": "2026-11-19 22:59:11 UTC+0000",
     "removed_utc": null
+  },
+  {
+    "nid": 43677,
+    "doc_id": "accounts.2026-Nov-20.01",
+    "uuid": "76409d5f-d29c-4c1c-91a5-d275d886c001",
+    "title_en": "Regarding preparation of budget collection and expenditure plan for the year 2027-2028.",
+    "title_mr": "सन २०२७-२०२८ चे अंदाजपत्रकीय जमा व खर्चाचा आराखडा तयार करणेबाबत. ",
+    "title_en_is_english": true,
+    "circular_date": "2026-11-20",
+    "tid": 4,
+    "department": "Chief Accounts And Finance Office",
+    "created": "2026-11-20T06:35:16+00:00",
+    "changed": "2026-11-20T06:35:16+00:00",
+    "fid": 40990,
+    "file_url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Budget%20circular_1.pdf",
+    "filename": "Budget circular_1.pdf",
+    "filesize": 477115,
+    "same_file_as": [],
+    "status": "ok",
+    "first_seen_utc": "2026-11-20 22:35:12 UTC+0000",
+    "last_seen_utc": "2026-11-20 22:35:12 UTC+0000",
+    "removed_utc": null
   }
 ]

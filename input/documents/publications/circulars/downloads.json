@@ -176695,5 +176695,24 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 40990,
+    "nids": [
+      43677
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Budget%20circular_1.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/accounts.2026-Nov-20.01.pdf"
+    ],
+    "size": 477115,
+    "sha1": "1ee52ccb271ae600dfd2c6363ac9496c6b8974ce",
+    "last_modified": "Fri, 20 Nov 2026 06:35:09 GMT",
+    "etag": "\"6affea1d-747bb\"",
+    "download_time_utc": "2026-11-20 22:35:28 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
