@@ -176714,5 +176714,81 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 41088,
+    "nids": [
+      43745
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/dr.sarika%20funde%20medical%20leave.%20raja.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-23.01.pdf"
+    ],
+    "size": 793902,
+    "sha1": "c8f7cc10b32a75260fa35e7a7e440b97c2f2cfef",
+    "last_modified": "Mon, 23 Nov 2026 12:05:29 GMT",
+    "etag": "\"6b042c09-c1d2e\"",
+    "download_time_utc": "2026-11-24 02:51:08 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 41089,
+    "nids": [
+      43747
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/shriganesh%20libare.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-23.02.pdf"
+    ],
+    "size": 606154,
+    "sha1": "bf2694e97cf1489b2e72d75e193bc0e93f8a4f3a",
+    "last_modified": "Mon, 23 Nov 2026 13:17:50 GMT",
+    "etag": "\"6b043cfe-93fca\"",
+    "download_time_utc": "2026-11-24 02:51:10 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 41090,
+    "nids": [
+      43749
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/ramdas%20lendewad.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-23.03.pdf"
+    ],
+    "size": 1203498,
+    "sha1": "9a7d53754691180a8e77f6f5a514d08abb1d4847",
+    "last_modified": "Mon, 23 Nov 2026 13:20:10 GMT",
+    "etag": "\"6b043d8a-125d2a\"",
+    "download_time_utc": "2026-11-24 02:51:13 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 41091,
+    "nids": [
+      43751
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/vyankat%20muddewad.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-23.04.pdf"
+    ],
+    "size": 605847,
+    "sha1": "e1fab601cac35625d1cbdb818b92345ff6c02d33",
+    "last_modified": "Mon, 23 Nov 2026 13:24:07 GMT",
+    "etag": "\"6b043e77-93e97\"",
+    "download_time_utc": "2026-11-24 02:51:15 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
