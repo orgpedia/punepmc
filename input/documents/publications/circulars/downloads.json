@@ -176790,5 +176790,24 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 41163,
+    "nids": [
+      43790
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8714%2025112026.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-25.01.pdf"
+    ],
+    "size": 398698,
+    "sha1": "de3db37fb7baf790298a914d2e659efa13e29f91",
+    "last_modified": "Wed, 25 Nov 2026 11:29:54 GMT",
+    "etag": "\"6b06c6b2-6156a\"",
+    "download_time_utc": "2026-11-26 00:08:47 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]

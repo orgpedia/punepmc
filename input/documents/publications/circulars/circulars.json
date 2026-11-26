@@ -213553,5 +213553,27 @@
     "first_seen_utc": "2026-11-24 02:50:36 UTC+0000",
     "last_seen_utc": "2026-11-24 02:50:36 UTC+0000",
     "removed_utc": null
+  },
+  {
+    "nid": 43790,
+    "doc_id": "gad.2026-Nov-25.01",
+    "uuid": "9d1ee69d-1598-4b8b-bfa4-4193a6035fd6",
+    "title_en": "Office Order:- Regarding organizing a formal meeting on 27th November 2026 at Pune Municipal Corporation on the occasion of Mahatma Phule's birth bicentenary and Satyagraha centenary.",
+    "title_mr": "कार्यालयीन आदेश :- महात्मा फुले जन्मद्विशताब्दी व सत्याग्रह शताब्दीनिमित्त पुणे महानगरपालिकेत  दि.२७ नोव्हेंबर २०२६ रोजी अभिरूप सभेचे आयोजन करणेबाबत.",
+    "title_en_is_english": true,
+    "circular_date": "2026-11-25",
+    "tid": 18,
+    "department": "General Administration",
+    "created": "2026-11-25T11:30:02+00:00",
+    "changed": "2026-11-25T11:30:02+00:00",
+    "fid": 41163,
+    "file_url": "https://webadmin.pmc.gov.in/sites/default/files/circular/8714%2025112026.pdf",
+    "filename": "8714 25112026.pdf",
+    "filesize": 398698,
+    "same_file_as": [],
+    "status": "ok",
+    "first_seen_utc": "2026-11-26 00:08:19 UTC+0000",
+    "last_seen_utc": "2026-11-26 00:08:19 UTC+0000",
+    "removed_utc": null
   }
 ]
