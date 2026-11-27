@@ -2258,6 +2258,18 @@
     "message": ""
   },
   {
+    "doc_id": "accounts.2026-Nov-26.01",
+    "fid": 41208,
+    "identifier": "in.gov.pmc.circular.accounts.2026-Nov-26.01",
+    "collection": "pune-pmc",
+    "sha1": "1954dc9bc35f81fb113a4e7b461f48d2e8385bc8",
+    "time_utc": "2026-11-27 00:32:00 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.accounts.2026-Nov-26.01",
+    "metadata_sha1": "170f6b0cfb1ed68ca94706636a8251c07f45cf50",
+    "message": ""
+  },
+  {
     "doc_id": "accounts.2026-Oct-27.01",
     "fid": 39976,
     "identifier": "in.gov.pmc.circular.accounts.2026-Oct-27.01",
@@ -29639,6 +29651,66 @@
     "message": ""
   },
   {
+    "doc_id": "gad.2026-Nov-26.01",
+    "fid": 41189,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-26.01",
+    "collection": "pune-pmc",
+    "sha1": "1cb091600fc085ed48a36b610a101fca05816366",
+    "time_utc": "2026-11-27 00:29:30 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Nov-26.01",
+    "metadata_sha1": "f3b66499ebb0123ac3f72c4957a8766893604c57",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Nov-26.02",
+    "fid": 41203,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-26.02",
+    "collection": "pune-pmc",
+    "sha1": "753c2262ff95b747141732fc2c8c3f783b50c623",
+    "time_utc": "2026-11-27 00:30:16 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Nov-26.02",
+    "metadata_sha1": "6de782fc49a9d6ebc02ec5d305864c2627976316",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Nov-26.03",
+    "fid": 41204,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-26.03",
+    "collection": "pune-pmc",
+    "sha1": "e4f40df5b7902270606890e4794dcd349278c891",
+    "time_utc": "2026-11-27 00:30:40 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Nov-26.03",
+    "metadata_sha1": "d4aa10eaa619ae394b0cbd937c02fbffb4684632",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Nov-26.04",
+    "fid": 41205,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-26.04",
+    "collection": "pune-pmc",
+    "sha1": "d6ff01a1a0a44dbc6c727160b2cac10669ead348",
+    "time_utc": "2026-11-27 00:31:03 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Nov-26.04",
+    "metadata_sha1": "d064f3d621b9a065c8c32b76d21793123a63ac50",
+    "message": ""
+  },
+  {
+    "doc_id": "gad.2026-Nov-26.05",
+    "fid": 41206,
+    "identifier": "in.gov.pmc.circular.gad.2026-Nov-26.05",
+    "collection": "pune-pmc",
+    "sha1": "d8fc0934ec0850a63d814ce359a2a839656d574f",
+    "time_utc": "2026-11-27 00:31:39 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.gad.2026-Nov-26.05",
+    "metadata_sha1": "9b2a22f461b7d2e9b631951af936b43fb3a436ef",
+    "message": ""
+  },
+  {
     "doc_id": "gad.2026-Oct-19.01",
     "fid": 39600,
     "identifier": "in.gov.pmc.circular.gad.2026-Oct-19.01",
@@ -36123,6 +36195,18 @@
     "upload_success": true,
     "archive_url": "https://archive.org/details/in.gov.pmc.circular.vigilance.2025-Mar-05.01",
     "metadata_sha1": "1c94c9c3a7b4d41885446a6c309f111116482cef",
+    "message": ""
+  },
+  {
+    "doc_id": "vigilance.2026-Nov-26.01",
+    "fid": 41202,
+    "identifier": "in.gov.pmc.circular.vigilance.2026-Nov-26.01",
+    "collection": "pune-pmc",
+    "sha1": "713e06025fe2724cb5001f0e42a05a3e268bfb20",
+    "time_utc": "2026-11-27 00:29:47 UTC+0000",
+    "upload_success": true,
+    "archive_url": "https://archive.org/details/in.gov.pmc.circular.vigilance.2026-Nov-26.01",
+    "metadata_sha1": "6de44f38853db49c3e601d7b312fddfe5095e635",
     "message": ""
   },
   {

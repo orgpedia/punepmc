@@ -176809,5 +176809,138 @@
     "format": "pdf",
     "attempts": 1,
     "current": true
+  },
+  {
+    "fid": 41189,
+    "nids": [
+      43814
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/26.11.2026%20SI.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-26.01.pdf"
+    ],
+    "size": 3539228,
+    "sha1": "1cb091600fc085ed48a36b610a101fca05816366",
+    "last_modified": "Thu, 26 Nov 2026 10:32:54 GMT",
+    "etag": "\"6b080ad6-36011c\"",
+    "download_time_utc": "2026-11-27 00:29:09 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 41202,
+    "nids": [
+      43823
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Vikaskamaanbabat%20.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/vigilance.2026-Nov-26.01.pdf"
+    ],
+    "size": 392729,
+    "sha1": "713e06025fe2724cb5001f0e42a05a3e268bfb20",
+    "last_modified": "Thu, 26 Nov 2026 12:43:50 GMT",
+    "etag": "\"6b082986-5fe19\"",
+    "download_time_utc": "2026-11-27 00:29:11 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 41203,
+    "nids": [
+      43825
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/26.11.2026%20Rutwek%20Pardeshi.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-26.02.pdf"
+    ],
+    "size": 2894523,
+    "sha1": "753c2262ff95b747141732fc2c8c3f783b50c623",
+    "last_modified": "Thu, 26 Nov 2026 13:20:21 GMT",
+    "etag": "\"6b083215-2c2abb\"",
+    "download_time_utc": "2026-11-27 00:29:15 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 41204,
+    "nids": [
+      43827
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/26.11.2026%20Ranjit%20Tidake.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-26.03.pdf"
+    ],
+    "size": 2856850,
+    "sha1": "e4f40df5b7902270606890e4794dcd349278c891",
+    "last_modified": "Thu, 26 Nov 2026 13:20:54 GMT",
+    "etag": "\"6b083236-2b9792\"",
+    "download_time_utc": "2026-11-27 00:29:19 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 41205,
+    "nids": [
+      43829
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/26.11.2026%20Vipul%20Chavan.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-26.04.pdf"
+    ],
+    "size": 2843949,
+    "sha1": "d6ff01a1a0a44dbc6c727160b2cac10669ead348",
+    "last_modified": "Thu, 26 Nov 2026 13:22:52 GMT",
+    "etag": "\"6b0832ac-2b652d\"",
+    "download_time_utc": "2026-11-27 00:29:23 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 41206,
+    "nids": [
+      43831
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/26.11.2026%20Snehal%20Waghela.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/gad.2026-Nov-26.05.pdf"
+    ],
+    "size": 2892525,
+    "sha1": "d8fc0934ec0850a63d814ce359a2a839656d574f",
+    "last_modified": "Thu, 26 Nov 2026 13:26:00 GMT",
+    "etag": "\"6b083368-2c22ed\"",
+    "download_time_utc": "2026-11-27 00:29:27 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
+  },
+  {
+    "fid": 41208,
+    "nids": [
+      43835
+    ],
+    "url": "https://webadmin.pmc.gov.in/sites/default/files/circular/Adhikar%20Supurti%20Circular.pdf",
+    "paths": [
+      "publications/circulars/pdfs/2026/accounts.2026-Nov-26.01.pdf"
+    ],
+    "size": 360247,
+    "sha1": "1954dc9bc35f81fb113a4e7b461f48d2e8385bc8",
+    "last_modified": "Thu, 26 Nov 2026 13:51:01 GMT",
+    "etag": "\"6b083945-57f37\"",
+    "download_time_utc": "2026-11-27 00:29:29 UTC+0000",
+    "status": "downloaded",
+    "format": "pdf",
+    "attempts": 1,
+    "current": true
   }
 ]
