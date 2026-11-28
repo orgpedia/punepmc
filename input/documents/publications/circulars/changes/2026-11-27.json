@@ -40,5 +40,47 @@
     "nid": 43835,
     "doc_id": "accounts.2026-Nov-26.01",
     "event": "new"
+  },
+  {
+    "time_utc": "2026-11-27 23:59:16 UTC+0000",
+    "nid": 43847,
+    "doc_id": "accounts.2026-Nov-27.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-27 23:59:16 UTC+0000",
+    "nid": 43897,
+    "doc_id": "dmc-zone4.2026-Nov-27.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-27 23:59:16 UTC+0000",
+    "nid": 43905,
+    "doc_id": "gad.2026-Nov-27.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-27 23:59:16 UTC+0000",
+    "nid": 43907,
+    "doc_id": "mc-office.2026-Nov-27.01",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-27 23:59:16 UTC+0000",
+    "nid": 43912,
+    "doc_id": "gad.2026-Nov-27.02",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-27 23:59:16 UTC+0000",
+    "nid": 43914,
+    "doc_id": "gad.2026-Nov-27.03",
+    "event": "new"
+  },
+  {
+    "time_utc": "2026-11-27 23:59:16 UTC+0000",
+    "nid": 43916,
+    "doc_id": "gad.2026-Nov-27.04",
+    "event": "new"
   }
 ]
